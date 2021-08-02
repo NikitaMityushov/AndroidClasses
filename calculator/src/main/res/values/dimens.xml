@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="numbers_size">100dp</dimen>
+    <dimen name="betweenNumbers">8dp</dimen>
+    <dimen name="_0_size">170dp</dimen>
+    <dimen name="rightPanelSizeButtons">75dp</dimen>
+</resources>

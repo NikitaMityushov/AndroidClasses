@@ -1,2 +1,3 @@
 rootProject.name = "AndroidClasses"
 include ':mapapplication'
+include ':calculator'
