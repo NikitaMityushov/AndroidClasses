@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="save_button">Save</string>
+    <string name="load_button">Load</string>
+    <string name="clear_button">Clear</string>
+    <string name="write_here_hint">write here…</string>
+    <string name="_0">0</string>
+    <string name="unsaved_changes">Unsaved changes</string>
+    <string name="all_changes_saved">All changes saved</string>
+</resources>
