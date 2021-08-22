@@ -2,3 +2,4 @@ rootProject.name = "AndroidClasses"
 include ':mapapplication'
 include ':calculator'
 include ':texteditor'
+include ':onlinetranslator'

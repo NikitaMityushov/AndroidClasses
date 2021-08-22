@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">OnlineTranslator</string>
+    <string name="online_translator">Online Translator</string>
+    <string name="write_your_text_here">write your text here ...</string>
+    <string name="translation">Translation</string>
+    <string name="please_choose_language">Please choose language</string>
+    <string name="please_choose_language_to_translate">Please choose language to translate</string>
+    <string name="translate">Translate</string>
+</resources>
