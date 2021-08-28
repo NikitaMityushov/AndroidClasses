@@ -1,7 +1,6 @@
 package com.mityushov.onlinetranslator
 
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
@@ -11,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.mityushov.onlinetranslator.databinding.ActivityMainBinding
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
-
+import kotlinx.coroutines.*
 
 private const val TAG = "MainActivity"
 
@@ -22,6 +21,7 @@ private val languages = listOf("arabic", "german", "english",
                                 "turkish", "chinese")
 
 class MainActivity : AppCompatActivity() {
+    private val scope = MainScope()
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,26 +75,31 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.translateButton.setOnClickListener {
+            // refresh tvResult
             binding.tvResult.text = ""
-            // start routine in another thread
-            Thread {
+            // start coroutine in another IO context
+            scope.launch(Dispatchers.IO) {
                 val url = "https://context.reverso.net/translation/${fromLang}-${toLang}/${binding.etInputText
                     .text
                     .toString()
                     .replace(" ", "+")}"
-
                 Log.d(TAG, "onClick(), url = $url")
-
                 val doc = Jsoup.connect(url).get()
                 val element: Element? = doc.getElementById("translations-content")
                 Log.d(TAG, "translation content is: ${element?.text()}")
-                this.runOnUiThread {
+
+                // update textView in main thread
+                withContext(Dispatchers.Main) {
                     binding.tvResult.text = element?.text()
                 }
-            }.start()
-
-            val handler = Handler()
+            }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        // cancel coroutine scope
+        scope.cancel()
     }
 
 }
