@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".UI.StockFragment">
+
+    <!-- title -->
+    <TextView
+        android:id="@+id/title_TV_fragment_stock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="16dp"
+        tools:text="Apple corp"
+        android:textAlignment="center"/>
+
+    <!-- 1) Ticker + -->
+    <TextView
+        android:id="@+id/ticker_TV"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/title_TV_fragment_stock"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="16dp"
+        android:text="@string/ticker"/>
+
+    <TextView
+        android:id="@+id/ticker_value_TV"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/title_TV_fragment_stock"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp"
+        tools:text="AAPL"/>
+
+    <!-- 2) Amount + -->
+    <TextView
+        android:id="@+id/amount_TV"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/ticker_TV"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="16dp"
+        android:text="@string/amount"/>
+
+    <TextView
+        android:id="@+id/amount_value_TV"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/ticker_value_TV"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp"
+        tools:text="5"/>
+
+    <!-- 3) Purchase currency + -->
+    <TextView
+        android:id="@+id/purchase_currency_TV"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/amount_TV"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="16dp"
+        android:text="@string/purchase_currency"/>
+
+    <TextView
+        android:id="@+id/purchase_currency_value_TV"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/amount_value_TV"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp"
+        tools:text="131"/>
+
+    <!-- 4) Purchase price -->
+    <TextView
+        android:id="@+id/purchase_price_TV"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/purchase_currency_TV"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="16dp"
+        android:text="@string/purchase_price"/>
+
+    <TextView
+        android:id="@+id/purchase_price_value_TV"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/purchase_currency_value_TV"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp"
+        tools:text="922"/>
+
+    <!-- 5) Purchase tax + -->
+    <TextView
+        android:id="@+id/purchase_tax_TV"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/purchase_price_TV"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="16dp"
+        android:text="@string/purchase_tax"/>
+
+    <TextView
+        android:id="@+id/purchase_tax_value_TV"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/purchase_price_value_TV"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp"
+        tools:text="1.22"/>
+
+    <!-- 6) Current currency + -->
+    <TextView
+        android:id="@+id/current_currency_TV"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/purchase_tax_TV"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="16dp"
+        android:text="@string/current_currency"/>
+
+    <TextView
+        android:id="@+id/current_currency_value_TV"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/purchase_tax_value_TV"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp"
+        tools:text="154"/>
+
+    <!-- 7) Current price + -->
+    <TextView
+        android:id="@+id/current_price_TV"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/current_currency_TV"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="16dp"
+        android:text="@string/current_price"/>
+
+    <TextView
+        android:id="@+id/current_price_value_TV"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/current_currency_value_TV"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp"
+        tools:text="1000"/>
+
+    <!-- 8) Total profit -->
+    <TextView
+        android:id="@+id/total_profit_TV"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/current_price_TV"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="16dp"
+        android:text="@string/total_profit"/>
+
+    <TextView
+        android:id="@+id/total_profit_value_TV"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/current_price_value_TV"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp"
+        tools:text="101"/>
+
+    <!-- 9) Profitability + -->
+    <TextView
+        android:id="@+id/profitability_TV"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/total_profit_TV"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="16dp"
+        android:text="@string/profitability"/>
+
+    <TextView
+        android:id="@+id/profitability_value_TV"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/total_profit_value_TV"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp"
+        tools:text="16%"/>
+
+    <!-- 10) Dividends -->
+    <TextView
+        android:id="@+id/dividends_TV"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/profitability_TV"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="16dp"
+        android:text="@string/dividends"/>
+
+    <TextView
+        android:id="@+id/dividends_value_TV"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/profitability_value_TV"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp"
+        tools:text="6"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Investor</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="investor">Investor</string>
+    <string name="buy">BUY</string>
+    <string name="sell">SELL</string>
+    <string name="summary_profit">Summary profit:</string>
+    <string name="daily_profit">Daily profit:</string>
+    <string name="ticker">Ticker</string>
+    <string name="amount">Amount</string>
+    <string name="purchase_price">Purchase_price</string>
+    <string name="purchase_tax">Purchase tax</string>
+    <string name="purchase_currency">Purchase currency</string>
+    <string name="current_currency">Current currency</string>
+    <string name="current_price">Current price</string>
+    <string name="total_profit">Total profit</string>
+    <string name="profitability">Profitability</string>
+    <string name="dividends">Dividends</string>
+</resources>
