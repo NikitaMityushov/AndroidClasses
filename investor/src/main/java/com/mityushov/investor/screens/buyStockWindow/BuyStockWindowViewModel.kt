@@ -1,4 +1,4 @@
-package com.mityushov.investor.models
+package com.mityushov.investor.screens.buyStockWindow
 
 import androidx.lifecycle.ViewModel
 

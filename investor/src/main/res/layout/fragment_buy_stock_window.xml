@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".UI.BuyStockWindowFragment">
+    tools:context=".screens.buyStockWindow.BuyStockWindowFragment">
     <!-- 0) header -->
     <TextView
-        android:id="@+id/header_tv"
+        android:id="@+id/buy_stock_header_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
@@ -17,10 +17,10 @@
         tools:text="Please enter the blank lines: "/>
     <!-- 1) Ticker -->
     <EditText
-        android:id="@+id/ticker_value_et"
+        android:id="@+id/buy_stock_ticker_value_et"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/header_tv"
+        app:layout_constraintTop_toBottomOf="@id/buy_stock_header_tv"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_margin="16dp"
         android:inputType="text"
@@ -28,19 +28,19 @@
         android:hint="@string/write_ticker"/>
 
     <TextView
-        android:id="@+id/ticker_tv"
+        android:id="@+id/buy_stock_ticker_tv"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@id/ticker_value_et"
-        app:layout_constraintStart_toEndOf="@id/ticker_value_et"
+        app:layout_constraintBottom_toBottomOf="@id/buy_stock_ticker_value_et"
+        app:layout_constraintStart_toEndOf="@id/buy_stock_ticker_value_et"
         android:layout_margin="16dp"
         android:text="@string/ticker"/>
     <!-- 2) Quantity -->
     <EditText
-        android:id="@+id/quantity_et"
+        android:id="@+id/buy_stock_quantity_et"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/ticker_value_et"
+        app:layout_constraintTop_toBottomOf="@id/buy_stock_ticker_tv"
         app:layout_constraintStart_toStartOf="parent"
         android:hint="@string/write_quantity"
         android:layout_margin="16dp"
@@ -48,20 +48,20 @@
         android:importantForAutofill="no"/>
 
     <TextView
-        android:id="@+id/quantity_tv"
+        android:id="@+id/buy_stock_quantity_tv"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@id/quantity_et"
-        app:layout_constraintStart_toEndOf="@id/quantity_et"
+        app:layout_constraintBottom_toBottomOf="@id/buy_stock_quantity_et"
+        app:layout_constraintStart_toEndOf="@id/buy_stock_quantity_et"
         android:layout_margin="16dp"
         android:text="@string/quantity"/>
 
     <!-- 3) Price -->
     <EditText
-        android:id="@+id/price_et"
+        android:id="@+id/buy_stock_price_et"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/quantity_et"
+        app:layout_constraintTop_toBottomOf="@id/buy_stock_quantity_tv"
         app:layout_constraintStart_toStartOf="parent"
         android:hint="@string/write_price"
         android:layout_margin="16dp"
@@ -69,19 +69,19 @@
         android:importantForAutofill="no"/>
 
     <TextView
-        android:id="@+id/price_tv"
+        android:id="@+id/buy_stock_price_tv"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@id/price_et"
-        app:layout_constraintStart_toEndOf="@id/price_et"
+        app:layout_constraintBottom_toBottomOf="@id/buy_stock_price_et"
+        app:layout_constraintStart_toEndOf="@id/buy_stock_price_et"
         android:layout_margin="16dp"
         android:text="@string/price"/>
     <!-- 4) Tax -->
     <EditText
-        android:id="@+id/tax_et"
+        android:id="@+id/buy_stock_tax_et"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/price_et"
+        app:layout_constraintTop_toBottomOf="@id/buy_stock_price_tv"
         app:layout_constraintStart_toStartOf="parent"
         android:hint="@string/write_tax"
         android:layout_margin="16dp"
@@ -89,24 +89,22 @@
         android:importantForAutofill="no"/>
 
     <TextView
-        android:id="@+id/tax_tv"
+        android:id="@+id/buy_stock_tax_tv"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@id/tax_et"
-        app:layout_constraintStart_toEndOf="@id/tax_et"
+        app:layout_constraintBottom_toBottomOf="@id/buy_stock_tax_et"
+        app:layout_constraintStart_toEndOf="@id/buy_stock_tax_et"
         android:layout_margin="16dp"
         android:text="@string/tax"/>
 
     <!-- Button <Buy> -->
     <Button
-        android:id="@+id/buy_btn"
+        android:id="@+id/buy_stock_buy_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/buy"
-        app:layout_constraintTop_toBottomOf="@id/tax_et"
+        app:layout_constraintTop_toBottomOf="@id/buy_stock_tax_tv"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_margin="16dp"/>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

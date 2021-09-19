@@ -2,24 +2,52 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".UI.StockFragment">
+    tools:context=".screens.stockFragment.StockFragment">
 
     <TextView
-        android:id="@+id/corp_name_TV"
-        android:layout_width="180dp"
+        android:id="@+id/stock_item_corp_name_tv"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="16dp"
+        android:textSize="16sp"
         tools:text="Microsoft corp"/>
 
     <TextView
-        android:id="@+id/current_price_TV"
-        android:layout_width="180dp"
+        android:id="@+id/stock_item_current_price_tv"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/stock_item_corp_name_tv"
+        android:layout_margin="16dp"
+        android:textSize="16sp"
+        android:textAlignment="center"
+        tools:text="160"/>
+
+    <ImageView
+        android:id="@+id/stock_item_iv"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintBottom_toBottomOf="@id/stock_item_current_price_tv"
+        app:layout_constraintStart_toEndOf="@id/stock_item_current_price_tv"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/stock_item_daily_change_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/stock_item_iv"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:text="160(+1.25%)"/>
+        android:layout_margin="16dp"
+        android:textSize="16sp"
+        tools:text="1.43 (+0.03%)"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,67 +4,62 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".UI.StockListFragment">
+    tools:context=".screens.stockFragmentList.StockListFragment">
 
     <Button
-        android:id="@+id/buy_button"
-        android:layout_width="180dp"
+        android:id="@+id/fragment_stock_list_buy_btn"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_margin="16dp"
         android:text="@string/buy"/>
 
-    <Button
-        android:id="@+id/sell_button"
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp"
-        android:text="@string/sell"/>
-
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/stock_list_recyclerview"
+        android:id="@+id/fragment_stock_list_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/buy_button"
+        app:layout_constraintTop_toBottomOf="@id/fragment_stock_list_buy_btn"
         android:layout_margin="16dp"/>
 
     <TextView
-        android:id="@+id/summary_profit_TV"
+        android:id="@+id/fragment_stock_list_summary_profit_tv"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/stock_list_recyclerview"
+        app:layout_constraintTop_toBottomOf="@id/fragment_stock_list_recyclerview"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_margin="16dp"
+        android:textSize="18sp"
         android:text="@string/summary_profit"/>
 
     <TextView
-        android:id="@+id/summary_profit_value_TV"
+        android:id="@+id/fragment_stock_list_summary_profit_value_TV"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/stock_list_recyclerview"
+        app:layout_constraintTop_toBottomOf="@id/fragment_stock_list_recyclerview"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="16dp"
+        android:textSize="18sp"
         tools:text="some_value"/>
 
     <TextView
-        android:id="@+id/daily_profit_TV"
+        android:id="@+id/fragment_stock_list_daily_profit_TV"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/summary_profit_TV"
+        app:layout_constraintTop_toBottomOf="@id/fragment_stock_list_summary_profit_tv"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_margin="16dp"
+        android:textSize="18sp"
         android:text="@string/daily_profit"/>
 
     <TextView
-        android:id="@+id/daily_profit_value_TV"
+        android:id="@+id/fragment_stock_list_daily_profit_value_TV"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/summary_profit_value_TV"
+        app:layout_constraintTop_toBottomOf="@id/fragment_stock_list_summary_profit_value_TV"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="16dp"
+        android:textSize="18sp"
         tools:text="some_value"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
