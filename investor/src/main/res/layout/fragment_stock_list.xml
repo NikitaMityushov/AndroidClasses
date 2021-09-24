@@ -30,7 +30,7 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_margin="16dp"
         android:textSize="18sp"
-        android:text="@string/summary_profit"/>
+        android:text="@string/total_profit"/>
 
     <TextView
         android:id="@+id/fragment_stock_list_summary_profit_value_TV"

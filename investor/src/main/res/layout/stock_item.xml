@@ -8,11 +8,11 @@
 
     <TextView
         android:id="@+id/stock_item_corp_name_tv"
-        android:layout_width="120dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="16dp"
+        android:layout_margin="8dp"
         android:textSize="16sp"
         tools:text="Microsoft corp"/>
 
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/stock_item_corp_name_tv"
-        android:layout_margin="16dp"
+        android:layout_margin="8dp"
         android:textSize="16sp"
         android:textAlignment="center"
         tools:text="160"/>
@@ -33,11 +33,12 @@
         android:layout_height="22dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:src="@drawable/ic_launcher_background"
+        app:srcCompat="@drawable/ic_launcher_background"
         app:layout_constraintBottom_toBottomOf="@id/stock_item_current_price_tv"
         app:layout_constraintStart_toEndOf="@id/stock_item_current_price_tv"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="1.0"
+        android:contentDescription="Arrow green or red" />
 
     <TextView
         android:id="@+id/stock_item_daily_change_tv"
@@ -46,7 +47,7 @@
         app:layout_constraintStart_toEndOf="@id/stock_item_iv"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp"
+        android:layout_margin="8dp"
         android:textSize="16sp"
         tools:text="1.43 (+0.03%)"/>
 

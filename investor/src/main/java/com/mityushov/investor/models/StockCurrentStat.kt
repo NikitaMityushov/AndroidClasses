@@ -15,6 +15,7 @@ class StockCurrentStat(private val stock: StockPurchase): StockAPI {
     private var currCurrency = 0.0F
     private var dailChange: Float = 0.0F
     private var dailChangePercent: Float = 0.0F
+    private var name = ""
 
     init {
         runBlocking {
@@ -33,16 +34,23 @@ class StockCurrentStat(private val stock: StockPurchase): StockAPI {
          */
         Log.d(TAG, "getCurCurrency() is called")
         val url = "https://www.cnbc.com/quotes/${stock.ticker}"
+        Log.d(TAG, "URL is $url")
+        /*
+            need try catch!!
+         */
         val doc = Jsoup.connect(url).get()
         val currentStat: Elements = doc.getElementsByClass("QuoteStrip-lastPrice")
         val openStat = doc.getElementsByClass("Summary-value")
+        val name = doc.getElementsByClass("QuoteStrip-name")
         //val element: Elements = doc.getElementsByClass("QuoteStrip-lastPriceStripContainer")
         Log.d(TAG, "\ncurrent currency is: ${currentStat[0].text()}")
         Log.d(TAG, "\nOpen value is: ${openStat[0].text()}")
+        Log.d(TAG, "\nCorp name is: ${name[0].text()}")
         val openCurr = openStat[0].text().toFloat()
         currCurrency = currentStat[0].text().toFloat()
         dailChange = currCurrency - openCurr
         dailChangePercent = 100 * dailChange / openCurr
+        this.name = name[0].text()
     }
     /*
         API methods
@@ -52,7 +60,7 @@ class StockCurrentStat(private val stock: StockPurchase): StockAPI {
     }
 
     override fun getName(): String {
-        return stock.name
+        return name
     }
 
     override fun getTicker(): String {
@@ -68,7 +76,7 @@ class StockCurrentStat(private val stock: StockPurchase): StockAPI {
     }
 
     override fun getPurchasePrice(): Float {
-        return stock.purchaseCurrency + stock.amount
+        return stock.purchaseCurrency * stock.amount
     }
 
     override fun getPurchaseTax(): Float {
@@ -96,7 +104,7 @@ class StockCurrentStat(private val stock: StockPurchase): StockAPI {
     }
 
     override fun getProfitability(): Float {
-        return 100 * (stock.amount * currCurrency / (getPurchasePrice() + stock.purchaseTax) - 1)
+        return 100 * ((stock.amount * currCurrency / (getPurchasePrice() + stock.purchaseTax)) - 1)
     }
 
     override fun getDividends(): Float {

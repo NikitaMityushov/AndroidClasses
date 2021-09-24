@@ -1,6 +1,7 @@
 package com.mityushov.investor.database
 
 import androidx.room.Dao
+import androidx.room.Insert
 import androidx.room.Query
 import com.mityushov.investor.models.StockPurchase
 import java.util.*
@@ -11,4 +12,6 @@ interface StockDao {
     fun getAllStocks(): List<StockPurchase>
     @Query("SELECT * FROM stock_purchases WHERE purchase_id=(:id)")
     fun getStockFromId(id: UUID): StockPurchase
+    @Insert
+    fun addStockPurchase(stock: StockPurchase)
 }

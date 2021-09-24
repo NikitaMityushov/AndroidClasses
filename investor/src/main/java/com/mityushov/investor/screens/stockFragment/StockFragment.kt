@@ -6,9 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.mityushov.investor.R
 import com.mityushov.investor.databinding.FragmentStockBinding
 import com.mityushov.investor.models.StockAPI
 import java.util.*
+import com.mityushov.investor.utils.setTextColorRedOrGreen
 
 private const val TAG = "StockFragment"
 private const val ARG_STOCK_ID = "stock_id"
@@ -47,8 +49,16 @@ class StockFragment private constructor() : Fragment() {
             fragmentStockPurchaseTaxValueTv.text = String.format("%.2f", stock.getPurchaseTax())
             fragmentStockCurrentCurrencyValueTv.text = String.format("%.2f", stock.getCurrentCurrency())
             fragmentStockCurrentPriceValueTv.text = String.format("%.2f", stock.getCurrentPrice())
-            fragmentStockTotalProfitValueTv.text = String.format("%.2f", stock.getTotalProfit())
-            fragmentStockProfitabilityValueTv.text = String.format("%.2f", stock.getProfitability())
+            fragmentStockTotalProfitValueTv.apply {
+                val value = stock.getTotalProfit()
+                text = String.format("%.2f", value)
+                setTextColorRedOrGreen(value, this)
+            }
+            fragmentStockProfitabilityValueTv.apply {
+                val value = stock.getProfitability()
+                text = String.format("%.2f%%", value)
+                setTextColorRedOrGreen(value, this)
+            }
         }
     }
 

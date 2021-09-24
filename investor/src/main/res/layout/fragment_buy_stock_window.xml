@@ -65,7 +65,7 @@
         app:layout_constraintStart_toStartOf="parent"
         android:hint="@string/write_price"
         android:layout_margin="16dp"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         android:importantForAutofill="no"/>
 
     <TextView
@@ -85,7 +85,7 @@
         app:layout_constraintStart_toStartOf="parent"
         android:hint="@string/write_tax"
         android:layout_margin="16dp"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         android:importantForAutofill="no"/>
 
     <TextView

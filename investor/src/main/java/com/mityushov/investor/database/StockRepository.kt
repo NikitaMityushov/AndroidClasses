@@ -37,28 +37,28 @@ class StockRepository private constructor(context: Context) {
 
     private fun init() {
         val aapl = StockCurrentStat(StockPurchase(
-            name = "Apple inc",
+            // name = "Apple inc",
             ticker = "AAPL",
             amount = 9,
             purchaseCurrency = 144.0F,
             purchaseTax = 20.31F))
 
         val msft = StockCurrentStat(StockPurchase(
-            name = "Microsoft inc",
+            // name = "Microsoft inc",
             ticker = "MSFT",
             amount = 10,
             purchaseCurrency = 256.19F,
             purchaseTax = 6.0F))
 
         val epam = StockCurrentStat(StockPurchase(
-            name = "EPAM systems",
+            // name = "EPAM systems",
             ticker = "EPAM",
             amount = 5,
             purchaseCurrency = 431.0F,
             purchaseTax = 6.0F))
 
         val tmus = StockCurrentStat(StockPurchase(
-            name = "T-Mobile",
+            // name = "T-Mobile",
             ticker = "TMUS",
             amount = 11,
             purchaseCurrency = 133.05F,
@@ -76,6 +76,16 @@ class StockRepository private constructor(context: Context) {
 
     fun getStockFromId(id: UUID): StockAPI {
         return list.filter { it.getId() == id }[0]
+    }
+    
+    fun addStockPurchase(stock: StockPurchase): Boolean {
+        val item = StockCurrentStat(stock)
+        return if (item.getCurrentCurrency() != null) {
+            list.add(item)
+            true
+        } else {
+            false
+        }
     }
 
 

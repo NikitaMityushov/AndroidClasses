@@ -14,6 +14,7 @@ import com.mityushov.investor.databinding.FragmentStockListBinding
 import com.mityushov.investor.databinding.StockItemBinding
 import com.mityushov.investor.models.StockAPI
 import java.util.*
+import com.mityushov.investor.utils.setTextColorRedOrGreen
 
 private const val TAG = "StockListFragment"
 
@@ -83,15 +84,9 @@ class StockListFragment : Fragment() {
                 }
 
                 with(stockItemDailyChangeTv) {
-                    text = String.format("%.2f (%.2f%%)", stock.getDailyChange(), stock.getDailyChangeInPercent())
-                    /*
-                        text color depends on change between open currency and current currency
-                     */
-                    if (stock.getDailyChange() < 0) {
-                        setTextColor(resources.getColor(R.color.red))
-                    } else if (stock.getDailyChange() > 0) {
-                        setTextColor(resources.getColor(R.color.green))
-                    }
+                    val value = stock.getDailyChange()
+                    text = String.format("%.2f (%.2f%%)", value, stock.getDailyChangeInPercent())
+                    setTextColorRedOrGreen(value, this)
                 }
             }
         }
@@ -125,23 +120,13 @@ class StockListFragment : Fragment() {
         binding.fragmentStockListSummaryProfitValueTV.apply {
             val value = stLstViewModel.getTotalProfit()
             text = String.format("%.2f", value)
-
-            if (value < 0) {
-                setTextColor(resources.getColor(R.color.red))
-            } else if (value > 0) {
-                setTextColor(resources.getColor(R.color.green))
-            }
+            setTextColorRedOrGreen(value, this)
         }
 
         binding.fragmentStockListDailyProfitValueTV.apply {
             val value = stLstViewModel.getDailyProfit()
             text = String.format("%.2f", value)
-
-            if (value < 0) {
-                setTextColor(resources.getColor(R.color.red))
-            } else if (value > 0) {
-                setTextColor(resources.getColor(R.color.green))
-            }
+            setTextColorRedOrGreen(value, this)
         }
     }
 }
