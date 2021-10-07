@@ -6,11 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import com.mityushov.investor.databinding.FragmentBuyStockWindowBinding
 import com.mityushov.investor.models.StockPurchase
 
 class BuyStockWindowFragment : Fragment() {
-    private val viewModel = BuyStockWindowViewModel()
+    private lateinit var viewModel: BuyStockWindowViewModel
     private lateinit var binding: FragmentBuyStockWindowBinding
 
     override fun onCreateView(
@@ -19,6 +20,8 @@ class BuyStockWindowFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentBuyStockWindowBinding.inflate(inflater, container, false)
+
+        viewModel = ViewModelProvider(this).get(BuyStockWindowViewModel::class.java)
         return binding.root
     }
 

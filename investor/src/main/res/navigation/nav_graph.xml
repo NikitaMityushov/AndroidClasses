@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/stockListFragment">
+
+    <fragment
+        android:id="@+id/stockListFragment"
+        android:name="com.mityushov.investor.screens.stockFragmentList.StockListFragment"
+        android:label="fragment_stock_list"
+        tools:layout="@layout/fragment_stock_list" >
+        <action
+            android:id="@+id/action_stockListFragment_to_buyStockWindowFragment"
+            app:destination="@id/buyStockWindowFragment" />
+        <action
+            android:id="@+id/action_stockListFragment_to_stockFragment"
+            app:destination="@id/stockFragment" />
+        <action
+            android:id="@+id/action_stockListFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/stockFragment"
+        android:name="com.mityushov.investor.screens.stockFragment.StockFragment"
+        android:label="fragment_stock"
+        tools:layout="@layout/fragment_stock" >
+        <action
+            android:id="@+id/action_stockFragment_to_stockListFragment"
+            app:destination="@id/stockListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.mityushov.investor.screens.aboutFragment.AboutFragment"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" >
+        <action
+            android:id="@+id/action_aboutFragment_to_stockListFragment"
+            app:destination="@id/stockListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/buyStockWindowFragment"
+        android:name="com.mityushov.investor.screens.buyStockWindow.BuyStockWindowFragment"
+        android:label="fragment_buy_stock_window"
+        tools:layout="@layout/fragment_buy_stock_window" >
+        <action
+            android:id="@+id/action_buyStockWindowFragment_to_stockListFragment"
+            app:destination="@id/stockListFragment" />
+    </fragment>
+</navigation>

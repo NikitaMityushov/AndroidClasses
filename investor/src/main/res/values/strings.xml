@@ -24,4 +24,5 @@
     <string name="price">Price</string>
     <string name="write_tax">write tax</string>
     <string name="tax">Tax</string>
+    <string name="about">About</string>
 </resources>

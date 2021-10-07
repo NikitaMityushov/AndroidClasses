@@ -1,22 +1,31 @@
 package com.mityushov.investor.screens.stockFragmentList
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.mityushov.investor.database.StockRepository
 import com.mityushov.investor.models.StockAPI
-import com.mityushov.investor.models.StockCurrentStat
-import com.mityushov.investor.models.StockPurchase
 
 class StockListViewModel: ViewModel() {
     private val repository = StockRepository.get()
-    private val list = repository.getAllStocks()
+    private val _list = MutableLiveData<List<StockAPI>>()
+    val list: LiveData<List<StockAPI>>
+        get() {
+            return _list
+        }
 
-    fun getData(): List<StockAPI> {
+    init {
+        _list.value = getData()
+    }
+
+
+    private fun getData(): List<StockAPI> {
         return repository.getAllStocks()
     }
 
     fun getTotalProfit(): Float {
         var res = 0.0F
-        for(item in list) {
+        for(item in _list.value!!) {
             res += item.getTotalProfit()
         }
 
@@ -26,7 +35,7 @@ class StockListViewModel: ViewModel() {
     fun getDailyProfit(): Float {
         var res = 0.0F
 
-        for (item in list) {
+        for (item in _list.value!!) {
             res += (item.getDailyChange() * item.getAmount().toFloat())
         }
 

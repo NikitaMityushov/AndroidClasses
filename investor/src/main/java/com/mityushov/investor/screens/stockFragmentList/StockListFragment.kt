@@ -2,21 +2,19 @@ package com.mityushov.investor.screens.stockFragmentList
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mityushov.investor.R
 import com.mityushov.investor.databinding.FragmentStockListBinding
 import com.mityushov.investor.databinding.StockItemBinding
 import com.mityushov.investor.models.StockAPI
+import com.mityushov.investor.screens.aboutFragment.AboutFragment
 import java.util.*
 import com.mityushov.investor.utils.setTextColorRedOrGreen
-
-private const val TAG = "StockListFragment"
+import timber.log.Timber
 
 class StockListFragment : Fragment() {
 
@@ -29,11 +27,16 @@ class StockListFragment : Fragment() {
     private lateinit var binding: FragmentStockListBinding
     private lateinit var stocksRecyclerView: RecyclerView
     private var adapter: StockListAdapter = StockListAdapter(emptyList())
-    private val stLstViewModel: StockListViewModel = StockListViewModel()
+    private lateinit var stLstViewModel: StockListViewModel
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         callbacks = context as Callbacks
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(
@@ -41,6 +44,8 @@ class StockListFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentStockListBinding.inflate(inflater, container, false)
+
+        stLstViewModel = ViewModelProvider(this).get(StockListViewModel::class.java)
 
         stocksRecyclerView = binding.fragmentStockListRecyclerview.also {
             it.layoutManager = LinearLayoutManager(context)
@@ -52,7 +57,11 @@ class StockListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        updateUI(stLstViewModel.getData())
+
+        stLstViewModel.list.observe(viewLifecycleOwner, { list ->
+            updateUI(list)
+        })
+
         binding.fragmentStockListBuyBtn.setOnClickListener {
             callbacks?.onBuyButtonPressed()
         }
@@ -92,7 +101,7 @@ class StockListFragment : Fragment() {
         }
 
         override fun onClick(v: View?) {
-            Log.d(TAG, "onClick() is called, stockId is ${stock.getId()}")
+            Timber.i("onClick() is called, stockId is ${stock.getId()}")
             callbacks?.onStockSelected(stock.getId())
         }
     }
@@ -111,6 +120,26 @@ class StockListFragment : Fragment() {
 
         override fun getItemCount(): Int {
             return stocks.size
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.overflow_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.overflow_menu_about_fragment -> {
+                val fragment = AboutFragment()
+                this.activity?.supportFragmentManager
+                    ?.beginTransaction()
+                    ?.replace(R.id.fragment_container, fragment)
+                    ?.addToBackStack(null)
+                    ?.commit()
+                true
+            }
+            else -> return super.onOptionsItemSelected(item)
         }
     }
 
