@@ -4,12 +4,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.mityushov.investor.R
+import com.mityushov.investor.models.StockPurchase
 import com.mityushov.investor.screens.buyStockWindow.BuyStockWindowFragment
 import com.mityushov.investor.screens.stockFragment.StockFragment
 import com.mityushov.investor.screens.stockFragmentList.StockListFragment
+import com.mityushov.investor.screens.updateStockWindow.UpdateStockWindowFragment
+import timber.log.Timber
 import java.util.*
-
-private const val TAG: String = "MainActivity"
 
 class MainActivity : AppCompatActivity(), StockListFragment.Callbacks {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +28,7 @@ class MainActivity : AppCompatActivity(), StockListFragment.Callbacks {
     }
 
     override fun onStockSelected(stockId: UUID) {
-        Log.d(TAG, "onStockedSelected() is called. StockId is $stockId")
+        Timber.d("onStockedSelected() is called. StockId is $stockId")
         val fragment = StockFragment.newInstance(stockId)
         supportFragmentManager
             .beginTransaction()
@@ -38,6 +39,16 @@ class MainActivity : AppCompatActivity(), StockListFragment.Callbacks {
 
     override fun onBuyButtonPressed() {
         val fragment = BuyStockWindowFragment()
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .addToBackStack(null)
+            .commit()
+    }
+
+    override fun onUpdateButtonPressed(stockPurchase: StockPurchase) {
+        Timber.d("onUpdateButtonPressed() is called. Stock ticker is ${stockPurchase.ticker}")
+        val fragment = UpdateStockWindowFragment.newInstance(stockPurchase)
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.fragment_container, fragment)

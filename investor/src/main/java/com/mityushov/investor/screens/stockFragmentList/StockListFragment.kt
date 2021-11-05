@@ -11,6 +11,7 @@ import com.mityushov.investor.R
 import com.mityushov.investor.databinding.FragmentStockListBinding
 import com.mityushov.investor.databinding.StockItemBinding
 import com.mityushov.investor.models.StockAPI
+import com.mityushov.investor.models.StockPurchase
 import com.mityushov.investor.screens.aboutFragment.AboutFragment
 import java.util.*
 import com.mityushov.investor.utils.setTextColorRedOrGreen
@@ -21,6 +22,7 @@ class StockListFragment : Fragment() {
     interface Callbacks {
         fun onStockSelected(stockId: UUID)
         fun onBuyButtonPressed()
+        fun onUpdateButtonPressed(stockPurchase: StockPurchase)
     }
 
     private var callbacks: Callbacks? = null
@@ -65,6 +67,20 @@ class StockListFragment : Fragment() {
         binding.fragmentStockListBuyBtn.setOnClickListener {
             callbacks?.onBuyButtonPressed()
         }
+/*
+        binding.fragmentStockListRecyclerview.setOnTouchListener(object: OnSwipeTouchListener(this.activity) {
+            override fun onSwipeBottom() {
+                super.onSwipeBottom()
+                Toast.makeText(context, "bottom", Toast.LENGTH_LONG).show()
+            }
+        })
+
+ */
+        binding.refreshBtn.setOnClickListener {
+            Timber.d("refresh is clicked")
+            stLstViewModel.refreshScreen()
+        }
+
     }
 
     override fun onDetach() {

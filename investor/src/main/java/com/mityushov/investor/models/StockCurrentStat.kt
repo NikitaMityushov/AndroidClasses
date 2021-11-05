@@ -1,28 +1,21 @@
 package com.mityushov.investor.models
 
-import android.util.Log
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import org.jsoup.Jsoup
 import org.jsoup.select.Elements
+import timber.log.Timber
 import java.util.*
 
-private const val TAG: String = "StockCurrentStat tag"
-
-class StockCurrentStat(private val stock: StockPurchase): StockAPI {
-
+class StockCurrentStat(val stock: StockPurchase): StockAPI {
     private var currCurrency = 0.0F
     private var dailChange: Float = 0.0F
     private var dailChangePercent: Float = 0.0F
     private var name = ""
 
     init {
-        runBlocking {
-            // blocking IO
-            withContext(Dispatchers.IO) {
-                getCurCurrency()
-            }
+        // start coroutine
+        runBlocking(context = Dispatchers.IO) {
+            getCurCurrency()
         }
     }
     /*
@@ -32,9 +25,9 @@ class StockCurrentStat(private val stock: StockPurchase): StockAPI {
         /**
          * Build request to www.cnbc.com with JSOUP
          */
-        Log.d(TAG, "getCurCurrency() is called")
+        Timber.d("getCurCurrency() is called")
         val url = "https://www.cnbc.com/quotes/${stock.ticker}"
-        Log.d(TAG, "URL is $url")
+        Timber.d("URL is $url")
         /*
             need try catch!!
          */
@@ -43,9 +36,9 @@ class StockCurrentStat(private val stock: StockPurchase): StockAPI {
         val openStat = doc.getElementsByClass("Summary-value")
         val name = doc.getElementsByClass("QuoteStrip-name")
         //val element: Elements = doc.getElementsByClass("QuoteStrip-lastPriceStripContainer")
-        Log.d(TAG, "\ncurrent currency is: ${currentStat[0].text()}")
-        Log.d(TAG, "\nOpen value is: ${openStat[0].text()}")
-        Log.d(TAG, "\nCorp name is: ${name[0].text()}")
+        Timber.d("\n" + "current currency is: " + currentStat[0].text())
+        Timber.d("\n" + "Open value is: " + openStat[0].text())
+        Timber.d("\n" + "Corp name is: " + name[0].text())
         val openCurr = openStat[0].text().toFloat()
         currCurrency = currentStat[0].text().toFloat()
         dailChange = currCurrency - openCurr

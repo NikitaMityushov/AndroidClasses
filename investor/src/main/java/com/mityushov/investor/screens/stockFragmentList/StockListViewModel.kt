@@ -41,4 +41,9 @@ class StockListViewModel: ViewModel() {
 
         return res
     }
+    // 1.11.21
+    fun refreshScreen() {
+        repository.refresh()
+        _list.value = getData()
+    }
 }

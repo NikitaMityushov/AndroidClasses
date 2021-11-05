@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.mityushov.investor.database.StockRepository
 import com.mityushov.investor.models.StockAPI
+import com.mityushov.investor.models.StockCurrentStat
+import com.mityushov.investor.models.StockPurchase
 import java.util.*
 
 class StockFragmentViewModel(private val id: UUID): ViewModel() {
@@ -21,6 +23,14 @@ class StockFragmentViewModel(private val id: UUID): ViewModel() {
 
     private fun getData(): StockAPI {
         return repository.getStockFromId(id)
+    }
+
+    fun deleteStock() {
+        repository.deleteStockPurchase(id)
+    }
+
+    fun getStockPurchase(): StockPurchase {
+        return (data.value as StockCurrentStat).stock
     }
 
 

@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_margin="16dp"
+        android:textSize="20sp"
         tools:text="Apple corp"
         android:textAlignment="center"/>
 
@@ -205,5 +206,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="16dp"
         tools:text="6"/>
+
+
+    <!-- 11) Update stock -->
+    <Button
+        android:id="@+id/fragment_stock_update_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/fragment_stock_dividends_tv"
+        android:layout_margin="16dp"
+        android:text="@string/update"/>
+
+    <!-- 12) Delete stock -->
+    <Button
+        android:id="@+id/fragment_stock_delete_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/fragment_stock_update_btn"
+        android:layout_margin="16dp"
+        android:text="@string/delete"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

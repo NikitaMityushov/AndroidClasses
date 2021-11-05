@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.mityushov.investor.databinding.FragmentBuyStockWindowBinding
 import com.mityushov.investor.models.StockPurchase
+import timber.log.Timber
 
 class BuyStockWindowFragment : Fragment() {
     private lateinit var viewModel: BuyStockWindowViewModel
@@ -29,11 +30,17 @@ class BuyStockWindowFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buyStockBuyBtn.setOnClickListener {
+
+            Timber.d("Ticker is ${binding.buyStockTickerValueEt.text.toString().uppercase()}")
+            Timber.d("amount is ${binding.buyStockQuantityEt.text}")
+            Timber.d("PurchaseCurrency is ${binding.buyStockPriceEt.text}")
+            Timber.d("PurchaseTax is ${binding.buyStockTaxEt.text}")
+
             val purchase = StockPurchase(
                 ticker = binding.buyStockTickerValueEt.text.toString().uppercase(),
                 amount = binding.buyStockQuantityEt.text.toString().toInt(),
-                // purchaseCurrency = binding.buyStockPriceEt.toString().toFloat(),
-                // purchaseTax = binding.buyStockTaxEt.toString().toFloat()
+                purchaseCurrency = binding.buyStockPriceEt.text.toString().toFloat(),
+                purchaseTax = binding.buyStockTaxEt.text.toString().toFloat()
             )
 
             val result = viewModel.addStock(purchase)
