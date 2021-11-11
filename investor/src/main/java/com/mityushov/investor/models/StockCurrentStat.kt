@@ -6,7 +6,7 @@ import org.jsoup.select.Elements
 import timber.log.Timber
 import java.util.*
 
-class StockCurrentStat(val stock: StockPurchase): StockAPI {
+class StockCurrentStat(private val stock: StockPurchase): StockAPI {
     private var currCurrency = 0.0F
     private var dailChange: Float = 0.0F
     private var dailChangePercent: Float = 0.0F
@@ -102,5 +102,9 @@ class StockCurrentStat(val stock: StockPurchase): StockAPI {
 
     override fun getDividends(): Float {
         TODO("Not yet implemented")
+    }
+
+    override fun getStockPurchase(): StockPurchase {
+        return stock
     }
 }

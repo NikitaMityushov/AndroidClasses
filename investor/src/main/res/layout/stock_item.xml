@@ -33,12 +33,12 @@
         android:layout_height="22dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        app:srcCompat="@drawable/ic_launcher_background"
         app:layout_constraintBottom_toBottomOf="@id/stock_item_current_price_tv"
         app:layout_constraintStart_toEndOf="@id/stock_item_current_price_tv"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        android:contentDescription="Arrow green or red" />
+        android:contentDescription="@string/arrow_green_or_red"
+        tools:srcCompat="@drawable/ic_launcher_background"/>
 
     <TextView
         android:id="@+id/stock_item_daily_change_tv"

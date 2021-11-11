@@ -2,8 +2,8 @@ package com.mityushov.investor.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.mityushov.investor.R
+import com.mityushov.investor.interfaces.Callbacks
 import com.mityushov.investor.models.StockPurchase
 import com.mityushov.investor.screens.buyStockWindow.BuyStockWindowFragment
 import com.mityushov.investor.screens.stockFragment.StockFragment
@@ -12,7 +12,7 @@ import com.mityushov.investor.screens.updateStockWindow.UpdateStockWindowFragmen
 import timber.log.Timber
 import java.util.*
 
-class MainActivity : AppCompatActivity(), StockListFragment.Callbacks {
+class MainActivity : AppCompatActivity(), Callbacks {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

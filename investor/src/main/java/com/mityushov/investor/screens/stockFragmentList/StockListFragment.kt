@@ -9,31 +9,24 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mityushov.investor.R
 import com.mityushov.investor.databinding.FragmentStockListBinding
-import com.mityushov.investor.databinding.StockItemBinding
+import com.mityushov.investor.interfaces.Callbacks
 import com.mityushov.investor.models.StockAPI
-import com.mityushov.investor.models.StockPurchase
 import com.mityushov.investor.screens.aboutFragment.AboutFragment
-import java.util.*
 import com.mityushov.investor.utils.setTextColorRedOrGreen
 import timber.log.Timber
 
 class StockListFragment : Fragment() {
 
-    interface Callbacks {
-        fun onStockSelected(stockId: UUID)
-        fun onBuyButtonPressed()
-        fun onUpdateButtonPressed(stockPurchase: StockPurchase)
-    }
-
     private var callbacks: Callbacks? = null
     private lateinit var binding: FragmentStockListBinding
     private lateinit var stocksRecyclerView: RecyclerView
-    private var adapter: StockListAdapter = StockListAdapter(emptyList())
+    private lateinit var adapter: StockListAdapter
     private lateinit var stLstViewModel: StockListViewModel
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         callbacks = context as Callbacks
+        adapter = StockListAdapter(callbacks!!)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,6 +47,7 @@ class StockListFragment : Fragment() {
             it.adapter = adapter
 
         }
+
         return binding.root
     }
 
@@ -88,57 +82,6 @@ class StockListFragment : Fragment() {
         callbacks = null
     }
 
-    // 1) create ViewHolder
-    private inner class StockItemViewHolder(itemView: View) : RecyclerView.ViewHolder(
-        itemView), View.OnClickListener {
-        private lateinit var stock: StockAPI
-        private val binding: StockItemBinding = StockItemBinding.bind(itemView)
-
-        init {
-            itemView.setOnClickListener(this)
-        }
-
-        fun bind(stock: StockAPI) {
-            this.stock = stock
-
-            with(binding) {
-                stockItemCorpNameTv.text = stock.getName()
-
-                with(stockItemCurrentPriceTv) {
-                    text = String.format("%.2f", stock.getCurrentCurrency())
-                }
-
-                with(stockItemDailyChangeTv) {
-                    val value = stock.getDailyChange()
-                    text = String.format("%.2f (%.2f%%)", value, stock.getDailyChangeInPercent())
-                    setTextColorRedOrGreen(value, this)
-                }
-            }
-        }
-
-        override fun onClick(v: View?) {
-            Timber.i("onClick() is called, stockId is ${stock.getId()}")
-            callbacks?.onStockSelected(stock.getId())
-        }
-    }
-    // 2) create Adapter
-    private inner class StockListAdapter(val stocks: List<StockAPI>) :
-        RecyclerView.Adapter<StockItemViewHolder>() {
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StockItemViewHolder {
-            val view = layoutInflater.inflate(R.layout.stock_item, parent, false)
-            return StockItemViewHolder(view)
-        }
-
-        override fun onBindViewHolder(holder: StockItemViewHolder, position: Int) {
-            val stock = stocks[position]
-            holder.bind(stock)
-        }
-
-        override fun getItemCount(): Int {
-            return stocks.size
-        }
-    }
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.overflow_menu, menu)
@@ -160,7 +103,7 @@ class StockListFragment : Fragment() {
     }
 
     private fun updateUI(stocks: List<StockAPI>) {
-        adapter = StockListAdapter(stocks)
+        adapter.submitList(stocks)
         stocksRecyclerView.adapter = adapter
         binding.fragmentStockListSummaryProfitValueTV.apply {
             val value = stLstViewModel.getTotalProfit()

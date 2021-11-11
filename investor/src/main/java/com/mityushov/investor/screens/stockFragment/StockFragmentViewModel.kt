@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.mityushov.investor.database.StockRepository
 import com.mityushov.investor.models.StockAPI
-import com.mityushov.investor.models.StockCurrentStat
 import com.mityushov.investor.models.StockPurchase
 import java.util.*
 
@@ -30,7 +29,7 @@ class StockFragmentViewModel(private val id: UUID): ViewModel() {
     }
 
     fun getStockPurchase(): StockPurchase {
-        return (data.value as StockCurrentStat).stock
+        return (data.value as StockAPI).getStockPurchase()
     }
 
 

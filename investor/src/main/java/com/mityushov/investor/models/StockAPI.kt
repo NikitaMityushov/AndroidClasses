@@ -17,4 +17,5 @@ interface StockAPI {
     fun getTotalProfit(): Float
     fun getProfitability(): Float
     fun getDividends(): Float
+    fun getStockPurchase(): StockPurchase
 }
