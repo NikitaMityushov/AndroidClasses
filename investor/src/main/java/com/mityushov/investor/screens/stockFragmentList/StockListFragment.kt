@@ -1,6 +1,5 @@
 package com.mityushov.investor.screens.stockFragmentList
 
-import android.content.Context
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -9,25 +8,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mityushov.investor.R
 import com.mityushov.investor.databinding.FragmentStockListBinding
-import com.mityushov.investor.interfaces.Callbacks
+import com.mityushov.investor.interfaces.navigator
 import com.mityushov.investor.models.StockAPI
-import com.mityushov.investor.screens.aboutFragment.AboutFragment
 import com.mityushov.investor.utils.setTextColorRedOrGreen
 import timber.log.Timber
 
 class StockListFragment : Fragment() {
 
-    private var callbacks: Callbacks? = null
     private lateinit var binding: FragmentStockListBinding
     private lateinit var stocksRecyclerView: RecyclerView
     private lateinit var adapter: StockListAdapter
     private lateinit var stLstViewModel: StockListViewModel
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        callbacks = context as Callbacks
-        adapter = StockListAdapter(callbacks!!)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +29,9 @@ class StockListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
+
+        adapter = StockListAdapter(this.navigator())
+
         binding = FragmentStockListBinding.inflate(inflater, container, false)
 
         stLstViewModel = ViewModelProvider(this).get(StockListViewModel::class.java)
@@ -59,7 +53,7 @@ class StockListFragment : Fragment() {
         })
 
         binding.fragmentStockListBuyBtn.setOnClickListener {
-            callbacks?.onBuyButtonPressed()
+            this.navigator().onBuyButtonPressed()
         }
 /*
         binding.fragmentStockListRecyclerview.setOnTouchListener(object: OnSwipeTouchListener(this.activity) {
@@ -77,11 +71,6 @@ class StockListFragment : Fragment() {
 
     }
 
-    override fun onDetach() {
-        super.onDetach()
-        callbacks = null
-    }
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.overflow_menu, menu)
@@ -90,15 +79,9 @@ class StockListFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.overflow_menu_about_fragment -> {
-                val fragment = AboutFragment()
-                this.activity?.supportFragmentManager
-                    ?.beginTransaction()
-                    ?.replace(R.id.fragment_container, fragment)
-                    ?.addToBackStack(null)
-                    ?.commit()
+                this.navigator().onAboutButtonPressed()
                 true
-            }
-            else -> return super.onOptionsItemSelected(item)
+            } else -> return super.onOptionsItemSelected(item)
         }
     }
 
