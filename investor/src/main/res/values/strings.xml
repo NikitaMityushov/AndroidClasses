@@ -30,4 +30,5 @@
     <string name="update">Update</string>
     <string name="save_changes">Save changes</string>
     <string name="arrow_green_or_red">Arrow green or red</string>
+    <string name="add_stock">Add stock</string>
 </resources>

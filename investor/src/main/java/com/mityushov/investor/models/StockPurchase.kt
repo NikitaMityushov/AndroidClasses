@@ -8,7 +8,6 @@ import java.util.UUID
 
 @Entity(tableName = "stock_purchases")
 data class StockPurchase(@PrimaryKey @ColumnInfo(name = "purchase_id") val id: UUID = UUID.randomUUID(),
-                    // @ColumnInfo(name = "name") val name: String = "",
                     @ColumnInfo(name = "ticker") val ticker: String = "",
                     @ColumnInfo(name = "amount") var amount: Int = 0,
                     @ColumnInfo(name = "purchase_currency") var purchaseCurrency: Float = 0.0F,

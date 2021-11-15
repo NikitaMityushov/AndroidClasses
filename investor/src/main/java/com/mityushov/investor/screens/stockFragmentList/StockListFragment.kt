@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.mityushov.investor.R
 import com.mityushov.investor.databinding.FragmentStockListBinding
 import com.mityushov.investor.interfaces.navigator
 import com.mityushov.investor.models.StockAPI
@@ -19,11 +18,6 @@ class StockListFragment : Fragment() {
     private lateinit var stocksRecyclerView: RecyclerView
     private lateinit var adapter: StockListAdapter
     private lateinit var stLstViewModel: StockListViewModel
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -69,20 +63,6 @@ class StockListFragment : Fragment() {
             stLstViewModel.refreshScreen()
         }
 
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.overflow_menu, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.overflow_menu_about_fragment -> {
-                this.navigator().onAboutButtonPressed()
-                true
-            } else -> return super.onOptionsItemSelected(item)
-        }
     }
 
     private fun updateUI(stocks: List<StockAPI>) {
