@@ -1,12 +1,16 @@
-package com.mityushov.investor.models
+package com.mityushov.investor.network
 
+import com.mityushov.investor.models.StockAPI
+import com.mityushov.investor.models.StockPurchase
 import kotlinx.coroutines.*
 import org.jsoup.Jsoup
 import org.jsoup.select.Elements
 import timber.log.Timber
 import java.util.*
 
-class StockCurrentStat(private val stock: StockPurchase): StockAPI {
+private const val BASE_URL = "https://www.cnbc.com/quotes/"
+
+class CnbcService(private val stock: StockPurchase): StockAPI {
     private var currCurrency = 0.0F
     private var dailChange: Float = 0.0F
     private var dailChangePercent: Float = 0.0F
@@ -26,7 +30,7 @@ class StockCurrentStat(private val stock: StockPurchase): StockAPI {
          * Build request to www.cnbc.com with JSOUP
          */
         Timber.d("getCurCurrency() is called")
-        val url = "https://www.cnbc.com/quotes/${stock.ticker}"
+        val url = "$BASE_URL${stock.ticker}"
         Timber.d("URL is $url")
         /*
             need try catch!!

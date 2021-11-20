@@ -3,7 +3,7 @@ package com.mityushov.investor.database
 import android.content.Context
 import androidx.room.Room
 import com.mityushov.investor.models.StockAPI
-import com.mityushov.investor.models.StockCurrentStat
+import com.mityushov.investor.network.CnbcService
 import com.mityushov.investor.models.StockPurchase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -38,7 +38,7 @@ class StockRepository private constructor(context: Context) {
             list.clear()
 
             for (item in ls) {
-                val currentStock = StockCurrentStat(item)
+                val currentStock = CnbcService(item)
                 list.add(currentStock)
             }
         }
@@ -53,7 +53,7 @@ class StockRepository private constructor(context: Context) {
     }
     
     fun addStockPurchase(stock: StockPurchase): Boolean {
-        val item = StockCurrentStat(stock)
+        val item = CnbcService(stock)
         // костыль, проверяющий криво, существует ли такой тикер, надо че то по лучше придумать!!!
         return if (item.getCurrentCurrency() != null) {
             // 31.10.21

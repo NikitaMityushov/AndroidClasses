@@ -3,7 +3,6 @@ package com.mityushov.investor.interfaces
 import androidx.fragment.app.Fragment
 import com.mityushov.investor.models.StockPurchase
 import java.util.*
-
 /**
  * Interface for every change fragment in the MainActivity
  */
