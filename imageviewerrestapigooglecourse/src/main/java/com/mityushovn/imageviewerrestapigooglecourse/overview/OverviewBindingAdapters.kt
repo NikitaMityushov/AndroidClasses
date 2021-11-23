@@ -1,15 +1,16 @@
 package com.mityushovn.imageviewerrestapigooglecourse.overview
 
-import android.graphics.Color
-import android.widget.TextView
+import android.widget.ImageView
+import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
 
-@BindingAdapter("textColorIfIWant")
-fun textColorIfIWant(tv: TextView, i: Int) {
-    when (i) {
-        1 -> tv.setTextColor(Color.RED)
-        else ->
-            tv.setTextColor(Color.GREEN)
-
+@BindingAdapter("bindImage")
+fun bindImage(iv: ImageView, imgUrl: String?) {
+    imgUrl?.let {
+        val imgUri = imgUrl.toUri().buildUpon().scheme("https").build()
+        Glide.with(iv.context)
+            .load(imgUri)
+            .into(iv)
     }
 }

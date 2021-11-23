@@ -9,6 +9,7 @@ import com.mityushovn.imageviewerrestapigooglecourse.network.Repository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
+import java.lang.Exception
 
 class OverviewViewModel : ViewModel() {
     private val repository = Repository.get()
@@ -26,10 +27,14 @@ class OverviewViewModel : ViewModel() {
 
     private fun getData(): List<MarsProperty>? {
         var data: List<MarsProperty>? = null
-        runBlocking {
-            withContext(viewModelScope.coroutineContext + Dispatchers.IO) {
-                data = repository.getProperties()
+        try {
+            runBlocking {
+                withContext(viewModelScope.coroutineContext + Dispatchers.IO) {
+                    data = repository.getProperties()
+                }
             }
+        } catch (e: Exception) {
+
         }
         return data
     }

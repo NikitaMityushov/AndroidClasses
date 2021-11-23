@@ -8,7 +8,6 @@
             name="marsProperty"
             type="com.mityushovn.imageviewerrestapigooglecourse.models.MarsProperty" />
     </data>
-<!--
     <ImageView
         android:id="@+id/mars_image"
         android:layout_width="match_parent"
@@ -17,13 +16,7 @@
         android:contentDescription="@string/marsimage"
         android:padding="2dp"
         android:scaleType="centerCrop"
+        app:bindImage="@{marsProperty.imgSrcUrl}"
         tools:src="@tools:sample/backgrounds/scenic" />
-    -->
-    <TextView
-        android:id="@+id/debug_text_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:text="@{marsProperty.toString()}"
-        app:textColorIfIWant="@{0}"/>
 
 </layout>

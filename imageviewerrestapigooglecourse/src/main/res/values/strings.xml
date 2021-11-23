@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">ImageViewerRestApiGoogleCourse</string>
     <string name="marsimage">MarsImage</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="this_is_an_about_fragment">This is an About Fragment</string>
+    <string name="about">About</string>
 </resources>

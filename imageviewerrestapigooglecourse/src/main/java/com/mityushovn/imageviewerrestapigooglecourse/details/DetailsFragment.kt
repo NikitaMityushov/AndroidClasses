@@ -7,20 +7,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.mityushovn.imageviewerrestapigooglecourse.R
+import com.mityushovn.imageviewerrestapigooglecourse.databinding.DetailsFragmentBinding
+import com.mityushovn.imageviewerrestapigooglecourse.models.MarsProperty
+import com.mityushovn.imageviewerrestapigooglecourse.overview.OverviewViewModel
 
 class DetailsFragment : Fragment() {
+    private lateinit var binding: DetailsFragmentBinding
+    private lateinit var property: MarsProperty
+    // or private val property: DetailsFragmentArgs by navArgs(), the same thing
 
-    companion object {
-        fun newInstance() = DetailsFragment()
+    private val viewModel: DetailsViewModel by lazy {
+        ViewModelProvider(this)[DetailsViewModel::class.java]
     }
-
-    private lateinit var viewModel: DetailsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.details_fragment, container, false)
+    ): View {
+        binding = DetailsFragmentBinding.inflate(layoutInflater, container, false)
+        property = DetailsFragmentArgs.fromBundle(requireArguments()).marsProperty
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

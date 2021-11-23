@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/overviewFragment">
+
+    <fragment
+        android:id="@+id/overviewFragment"
+        android:name="com.mityushovn.imageviewerrestapigooglecourse.overview.OverviewFragment"
+        android:label="Overview">
+        <action
+            android:id="@+id/action_overviewFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+        <action
+            android:id="@+id/action_overviewFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.mityushovn.imageviewerrestapigooglecourse.details.DetailsFragment"
+        android:label="Details" >
+        <argument
+            android:name="marsProperty"
+            app:argType="com.mityushovn.imageviewerrestapigooglecourse.models.MarsProperty" />
+    </fragment>
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.mityushovn.imageviewerrestapigooglecourse.about.AboutFragment"
+        android:label="About"
+        tools:layout="@layout/fragment_about" />
+</navigation>

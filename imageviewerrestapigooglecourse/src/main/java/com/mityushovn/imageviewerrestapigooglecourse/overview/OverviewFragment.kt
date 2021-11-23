@@ -1,16 +1,13 @@
 package com.mityushovn.imageviewerrestapigooglecourse.overview
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
+import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.RecyclerView
 import com.mityushovn.imageviewerrestapigooglecourse.R
-import com.mityushovn.imageviewerrestapigooglecourse.databinding.ActivityMainBinding
 import com.mityushovn.imageviewerrestapigooglecourse.databinding.OverviewFragmentBinding
 import com.mityushovn.imageviewerrestapigooglecourse.models.MarsProperty
 
@@ -27,22 +24,25 @@ class OverviewFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         adapter = OverviewListAdapter(listOf())
 
         binding = OverviewFragmentBinding.inflate(inflater)
-        binding.lifecycleOwner = this.activity
+        binding.lifecycleOwner = this
 
         recyclerView = binding.overviewRecyclerview.also {
             it.adapter = adapter
         }
+
+        setHasOptionsMenu(true)
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.data.observe(viewLifecycleOwner, {data ->
+        viewModel.data.observe(viewLifecycleOwner, { data ->
             updateUI(data)
         })
 
@@ -51,6 +51,16 @@ class OverviewFragment : Fragment() {
     private fun updateUI(data: List<MarsProperty>) {
         val adapter = OverviewListAdapter(data)
         recyclerView.adapter = adapter
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.overflow_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return NavigationUI.onNavDestinationSelected(item, requireView().findNavController())
+                || super.onOptionsItemSelected(item)
     }
 
 }
