@@ -2,8 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/overflow_menu_about"
+        android:id="@+id/aboutFragment"
         android:title="@string/about"
+        android:menuCategory="secondary"
         app:showAsAction="never"/>
 
 </menu>

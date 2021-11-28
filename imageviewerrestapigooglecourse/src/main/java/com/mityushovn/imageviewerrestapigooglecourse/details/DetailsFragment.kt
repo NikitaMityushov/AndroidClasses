@@ -14,7 +14,8 @@ import com.mityushovn.imageviewerrestapigooglecourse.overview.OverviewViewModel
 class DetailsFragment : Fragment() {
     private lateinit var binding: DetailsFragmentBinding
     private lateinit var property: MarsProperty
-    // or private val property: DetailsFragmentArgs by navArgs(), the same thing
+    // or private val safeArgs: DetailsFragmentArgs by navArgs(), the same thing
+//    and then property = safeArgs.property
 
     private val viewModel: DetailsViewModel by lazy {
         ViewModelProvider(this)[DetailsViewModel::class.java]
