@@ -1,8 +1,8 @@
 package com.mityushov.investor.screens.buyStockWindow
 
 import androidx.lifecycle.ViewModel
-import com.mityushov.investor.database.StockRepository
 import com.mityushov.investor.models.StockPurchase
+import com.mityushov.investor.repository.StockRepository
 import java.lang.Exception
 
 class BuyStockWindowViewModel: ViewModel() {

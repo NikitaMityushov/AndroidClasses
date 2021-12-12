@@ -7,8 +7,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mityushov.investor.databinding.FragmentStockListBinding
-import com.mityushov.investor.interfaces.navigator
-import com.mityushov.investor.models.StockAPI
+import com.mityushov.investor.navigation.navigator
+import com.mityushov.investor.models.CacheStockPurchase
 import com.mityushov.investor.utils.setTextColorRedOrGreen
 import timber.log.Timber
 
@@ -65,7 +65,7 @@ class StockListFragment : Fragment() {
 
     }
 
-    private fun updateUI(stocks: List<StockAPI>) {
+    private fun updateUI(stocks: List<CacheStockPurchase>) {
         adapter.submitList(stocks)
         stocksRecyclerView.adapter = adapter
         binding.fragmentStockListSummaryProfitValueTV.apply {

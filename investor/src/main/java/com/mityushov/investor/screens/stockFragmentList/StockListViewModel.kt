@@ -1,32 +1,19 @@
 package com.mityushov.investor.screens.stockFragmentList
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.mityushov.investor.database.StockRepository
-import com.mityushov.investor.models.StockAPI
+import androidx.lifecycle.viewModelScope
+import com.mityushov.investor.repository.StockRepository
+import kotlinx.coroutines.launch
 
-class StockListViewModel: ViewModel() {
+class StockListViewModel : ViewModel() {
     private val repository = StockRepository.get()
-    private val _list = MutableLiveData<List<StockAPI>>()
-    val list: LiveData<List<StockAPI>>
-        get() {
-            return _list
-        }
+    val list = repository.list
 
-    init {
-        _list.value = getData()
-    }
-
-
-    private fun getData(): List<StockAPI> {
-        return repository.getAllStocks()
-    }
-
+    // TODO: 12.12.2021 снести все расчеты в repository
     fun getTotalProfit(): Float {
         var res = 0.0F
-        for(item in _list.value!!) {
-            res += item.getTotalProfit()
+        for (item in list.value!!) {
+            res += item.totalProfit
         }
 
         return res
@@ -35,15 +22,17 @@ class StockListViewModel: ViewModel() {
     fun getDailyProfit(): Float {
         var res = 0.0F
 
-        for (item in _list.value!!) {
-            res += (item.getDailyChange() * item.getAmount().toFloat())
+        for (item in list.value!!) {
+            res += (item.dailyChange * item.amount.toFloat())
         }
 
         return res
     }
+
     // 1.11.21
     fun refreshScreen() {
-        repository.refresh()
-        _list.value = getData()
+        viewModelScope.launch {
+            repository.refresh()
+        }
     }
 }

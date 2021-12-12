@@ -44,6 +44,7 @@ class UpdateStockWindowFragment private constructor() : Fragment() {
         binding.updateStockSaveChangesBtn.setOnClickListener {
             updateStockPurchaseFromUI()
             viewModel.updateStockPurchase()
+            Timber.d("Stock is $stockPurchase")
             Timber.d("Save changes button is pressed")
             Toast.makeText(context, "Successfully updated", Toast.LENGTH_SHORT).show()
             this.activity?.onBackPressed()
@@ -67,10 +68,6 @@ class UpdateStockWindowFragment private constructor() : Fragment() {
             stockPurchase.purchaseTax = updateStockTaxEt.text.toString().toFloat()
         }
     }
-
-
-
-
 
     companion object {
         fun newInstance(stockPurchase: StockPurchase): UpdateStockWindowFragment {

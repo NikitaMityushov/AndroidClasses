@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.mityushov.investor.R
 import com.mityushov.investor.databinding.ActivityMainBinding
-import com.mityushov.investor.interfaces.Navigator
+import com.mityushov.investor.navigation.Navigator
 import com.mityushov.investor.models.StockPurchase
 import com.mityushov.investor.screens.aboutFragment.AboutFragment
 import com.mityushov.investor.screens.buyStockWindow.BuyStockWindowFragment

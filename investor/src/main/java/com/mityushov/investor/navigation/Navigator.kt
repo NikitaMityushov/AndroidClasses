@@ -1,4 +1,4 @@
-package com.mityushov.investor.interfaces
+package com.mityushov.investor.navigation
 
 import androidx.fragment.app.Fragment
 import com.mityushov.investor.models.StockPurchase

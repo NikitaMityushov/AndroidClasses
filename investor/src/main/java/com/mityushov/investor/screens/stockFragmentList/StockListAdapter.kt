@@ -7,15 +7,15 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mityushov.investor.R
 import com.mityushov.investor.databinding.StockItemBinding
-import com.mityushov.investor.interfaces.Navigator
-import com.mityushov.investor.models.StockAPI
+import com.mityushov.investor.navigation.Navigator
+import com.mityushov.investor.models.CacheStockPurchase
 import com.mityushov.investor.utils.StockAPIDiffCallback
 import com.mityushov.investor.utils.setArrowImageRedOrGreen
 import com.mityushov.investor.utils.setTextColorRedOrGreen
 import timber.log.Timber
 
 class StockListAdapter(private val navigator: Navigator):
-    ListAdapter<StockAPI, StockListAdapter.StockItemViewHolder>(StockAPIDiffCallback()) {
+    ListAdapter<CacheStockPurchase, StockListAdapter.StockItemViewHolder>(StockAPIDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StockListAdapter.StockItemViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -31,7 +31,7 @@ class StockListAdapter(private val navigator: Navigator):
     // ViewHolder
     inner class StockItemViewHolder(itemView: View) : RecyclerView.ViewHolder(
         itemView), View.OnClickListener {
-        private lateinit var stock: StockAPI
+        private lateinit var stock: CacheStockPurchase
         private val binding: StockItemBinding = StockItemBinding.bind(itemView)
         private lateinit var navigator: Navigator
 
@@ -39,30 +39,30 @@ class StockListAdapter(private val navigator: Navigator):
             itemView.setOnClickListener(this)
         }
 
-        fun bind(stock: StockAPI, navigator: Navigator) {
+        fun bind(stock: CacheStockPurchase, navigator: Navigator) {
             this.stock = stock
             this.navigator = navigator
 
             with(binding) {
-                stockItemCorpNameTv.text = stock.getName()
-                stockItemCurrentPriceTv.text = String.format("%.2f", stock.getCurrentCurrency())
+                stockItemCorpNameTv.text = stock.name
+                stockItemCurrentPriceTv.text = String.format("%.2f", stock.currentCurrency)
 
                 with(stockItemDailyChangeTv) {
-                    val value = stock.getDailyChange()
-                    text = String.format("%.2f (%.2f%%)", value, stock.getDailyChangeInPercent())
+                    val value = stock.dailyChange
+                    text = String.format("%.2f (%.2f%%)", value, stock.dailyChangePercent)
                     setTextColorRedOrGreen(value, this)
                 }
 
                 with(stockItemIv) {
-                    val value = stock.getDailyChange()
+                    val value = stock.dailyChange
                     setImageResource(setArrowImageRedOrGreen(value, this))
                 }
             }
         }
 
         override fun onClick(v: View?) {
-            Timber.i("onClick() is called, stockId is ${stock.getId()}")
-            navigator.onStockSelected(stock.getId())
+            Timber.i("onClick() is called, stockId is ${stock.id}")
+            navigator.onStockSelected(stock.id)
         }
     }
 

@@ -1,36 +1,23 @@
 package com.mityushov.investor.screens.stockFragment
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.mityushov.investor.database.StockRepository
-import com.mityushov.investor.models.StockAPI
 import com.mityushov.investor.models.StockPurchase
+import com.mityushov.investor.models.asStockPurchase
+import com.mityushov.investor.repository.StockRepository
+import timber.log.Timber
 import java.util.*
 
-class StockFragmentViewModel(private val id: UUID): ViewModel() {
+class StockFragmentViewModel(private val id: UUID) : ViewModel() {
     private val repository = StockRepository.get()
-    private val _data = MutableLiveData<StockAPI>()
-    val data: LiveData<StockAPI>
-        get() {
-            return _data
-        }
-
-    init {
-        _data.value = getData()
-    }
-
-    private fun getData(): StockAPI {
-        return repository.getStockFromId(id)
-    }
+    val data = repository.getCacheStockPurchaseFromId(id)
 
     fun deleteStock() {
         repository.deleteStockPurchase(id)
     }
 
     fun getStockPurchase(): StockPurchase {
-        return (data.value as StockAPI).getStockPurchase()
+        Timber.d("StockFragmentViewModel getStockPurchase is called")
+        return data.value.asStockPurchase()
     }
-
 
 }

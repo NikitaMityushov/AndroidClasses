@@ -10,17 +10,30 @@ import java.util.*
 
 private const val BASE_URL = "https://www.cnbc.com/quotes/"
 
-class CnbcService(private val stock: StockPurchase): StockAPI {
+class CnbcService(private val stockPurchase: StockPurchase) : StockAPI {
     private var currCurrency = 0.0F
     private var dailChange: Float = 0.0F
     private var dailChangePercent: Float = 0.0F
     private var name = ""
+    val stockDto: StockDto
 
     init {
         // start coroutine
         runBlocking(context = Dispatchers.IO) {
             getCurCurrency()
         }
+        stockDto = StockDto(
+            stockPurchase = stockPurchase,
+            purchasePrice = getPurchasePrice(),
+            currentCurrency = currCurrency,
+            dailyChange = dailChange,
+            dailyChangePercent = dailChangePercent,
+            currentPrice = getCurrentPrice(),
+            totalProfit = getTotalProfit(),
+            profitability = getProfitability(),
+            dividends = getDividends(),
+            name = getName()
+        )
     }
     /*
         private methods
@@ -30,7 +43,7 @@ class CnbcService(private val stock: StockPurchase): StockAPI {
          * Build request to www.cnbc.com with JSOUP
          */
         Timber.d("getCurCurrency() is called")
-        val url = "$BASE_URL${stock.ticker}"
+        val url = "$BASE_URL${stockPurchase.ticker}"
         Timber.d("URL is $url")
         /*
             need try catch!!
@@ -49,11 +62,12 @@ class CnbcService(private val stock: StockPurchase): StockAPI {
         dailChangePercent = 100 * dailChange / openCurr
         this.name = name[0].text()
     }
+
     /*
         API methods
      */
     override fun getId(): UUID {
-        return stock.id
+        return stockPurchase.id
     }
 
     override fun getName(): String {
@@ -61,23 +75,23 @@ class CnbcService(private val stock: StockPurchase): StockAPI {
     }
 
     override fun getTicker(): String {
-        return stock.ticker
+        return stockPurchase.ticker
     }
 
     override fun getAmount(): Int {
-        return stock.amount
+        return stockPurchase.amount
     }
 
     override fun getPurchaseCurrency(): Float {
-        return stock.purchaseCurrency
+        return stockPurchase.purchaseCurrency
     }
 
     override fun getPurchasePrice(): Float {
-        return stock.purchaseCurrency * stock.amount
+        return stockPurchase.purchaseCurrency * stockPurchase.amount
     }
 
     override fun getPurchaseTax(): Float {
-        return stock.purchaseTax
+        return stockPurchase.purchaseTax
     }
 
     override fun getCurrentCurrency(): Float {
@@ -93,22 +107,23 @@ class CnbcService(private val stock: StockPurchase): StockAPI {
     }
 
     override fun getCurrentPrice(): Float {
-        return stock.amount * currCurrency
+        return stockPurchase.amount * currCurrency
     }
 
     override fun getTotalProfit(): Float {
-        return stock.amount * (currCurrency - stock.purchaseCurrency) - stock.purchaseTax
+        return stockPurchase.amount * (currCurrency - stockPurchase.purchaseCurrency) - stockPurchase.purchaseTax
     }
 
     override fun getProfitability(): Float {
-        return 100 * ((stock.amount * currCurrency / (getPurchasePrice() + stock.purchaseTax)) - 1)
+        return 100 * ((stockPurchase.amount * currCurrency / (getPurchasePrice() + stockPurchase.purchaseTax)) - 1)
     }
 
     override fun getDividends(): Float {
-        TODO("Not yet implemented")
+        // TODO("Not yet implemented")
+        return 0.0F
     }
 
     override fun getStockPurchase(): StockPurchase {
-        return stock
+        return stockPurchase
     }
 }

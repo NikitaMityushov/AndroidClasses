@@ -1,14 +1,14 @@
 package com.mityushov.investor.utils
 
 import androidx.recyclerview.widget.DiffUtil
-import com.mityushov.investor.models.StockAPI
+import com.mityushov.investor.models.CacheStockPurchase
 
-class StockAPIDiffCallback: DiffUtil.ItemCallback<StockAPI>() {
-    override fun areItemsTheSame(oldItem: StockAPI, newItem: StockAPI): Boolean {
-        return oldItem.getId() == newItem.getId()
+class StockAPIDiffCallback: DiffUtil.ItemCallback<CacheStockPurchase>() {
+    override fun areItemsTheSame(oldItem: CacheStockPurchase, newItem: CacheStockPurchase): Boolean {
+        return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: StockAPI, newItem: StockAPI): Boolean {
-        return oldItem.getStockPurchase() == newItem.getStockPurchase()
+    override fun areContentsTheSame(oldItem: CacheStockPurchase, newItem: CacheStockPurchase): Boolean {
+        return oldItem == newItem
     }
 }
