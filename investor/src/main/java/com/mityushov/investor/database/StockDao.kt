@@ -20,6 +20,9 @@ interface StockDao {
     @Query("DELETE FROM stock_purchases WHERE purchase_id=(:id)")
     fun deleteStockFromId(id: UUID)
 
+    @Delete
+    fun deleteStock(stock: StockPurchase)
+
     @Update
     fun updateStock(stock: StockPurchase)
 }

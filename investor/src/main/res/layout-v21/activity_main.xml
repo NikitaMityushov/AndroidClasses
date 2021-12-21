@@ -48,8 +48,7 @@
             android:backgroundTint="@color/primaryColor"
             app:fabCradleMargin="4dp"
             app:fabCradleRoundedCornerRadius="16dp"
-            app:hideOnScroll="true"
-            tools:targetApi="lollipop" />
+            app:hideOnScroll="true" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/refresh_btn"
@@ -57,7 +56,7 @@
             android:layout_height="wrap_content"
             android:contentDescription="@string/refresh"
             app:layout_anchor="@id/bottom_app_bar"
-            app:srcCompat="@drawable/ic_baseline_autorenew_24"/>
+            app:srcCompat="@drawable/ic_baseline_autorenew_24" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

@@ -5,8 +5,11 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.bottomappbar.BottomAppBar
 import com.mityushov.investor.R
 import com.mityushov.investor.databinding.ActivityMainBinding
 import com.mityushov.investor.navigation.Navigator
@@ -15,12 +18,15 @@ import com.mityushov.investor.screens.aboutFragment.AboutFragment
 import com.mityushov.investor.screens.buyStockWindow.BuyStockWindowFragment
 import com.mityushov.investor.screens.stockFragment.StockFragment
 import com.mityushov.investor.screens.stockFragmentList.StockListFragment
+import com.mityushov.investor.screens.stockFragmentList.StockListViewModel
 import com.mityushov.investor.screens.updateStockWindow.UpdateStockWindowFragment
 import timber.log.Timber
 import java.util.*
 
 class MainActivity : AppCompatActivity(), Navigator {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var viewModel: MainActivityViewModel
+    lateinit var bottomAppBar: BottomAppBar
 
     private val currentFragment: Fragment
         get() = supportFragmentManager.findFragmentById(R.id.fragment_container)!!
@@ -35,18 +41,31 @@ class MainActivity : AppCompatActivity(), Navigator {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // 1) init block
         binding = ActivityMainBinding.inflate(this.layoutInflater).also {
             setContentView(it.root)
         }
-        // Home screen init
+        viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
+        bottomAppBar = binding.bottomAppBar
+        setSupportActionBar(bottomAppBar)
+
+        // apply night mode
+//        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+
+        // 2) Start screen init
         if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
-                .add(R.id.fragment_container, StockListFragment())
+                .replace(R.id.fragment_container, StockListFragment())
                 .commit()
         }
 
         supportFragmentManager.registerFragmentLifecycleCallbacks(fragmentListener, false)
+        // 3) Handle the FAB click
+        binding.refreshBtn.setOnClickListener {
+            Timber.d("refresh is clicked")
+            viewModel.refreshScreen()
+        }
     }
 
     override fun onDestroy() {

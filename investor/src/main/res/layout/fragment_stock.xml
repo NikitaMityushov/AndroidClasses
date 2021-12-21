@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/normal_spacing"
         android:textSize="20sp"
         tools:text="Apple corp"
         android:textAlignment="center"/>
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/fragment_stock_title_tv"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/normal_spacing"
         android:text="@string/ticker"/>
 
     <TextView
@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/fragment_stock_title_tv"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/normal_spacing"
         tools:text="AAPL"/>
 
     <!-- 2) Amount + -->
@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/fragment_stock_ticker_value_tv"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/normal_spacing"
         android:text="@string/amount"/>
 
     <TextView
@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/fragment_stock_ticker_value_tv"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/normal_spacing"
         tools:text="5"/>
 
     <!-- 3) Purchase currency + -->
@@ -62,7 +62,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/fragment_stock_amount_value_tv"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/normal_spacing"
         android:text="@string/purchase_currency"/>
 
     <TextView
@@ -71,7 +71,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/fragment_stock_amount_value_tv"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/normal_spacing"
         tools:text="131"/>
 
     <!-- 4) Purchase price -->
@@ -81,7 +81,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/fragment_stock_purchase_currency_value_tv"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/normal_spacing"
         android:text="@string/purchase_price"/>
 
     <TextView
@@ -90,7 +90,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/fragment_stock_purchase_currency_value_tv"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/normal_spacing"
         tools:text="922"/>
 
     <!-- 5) Purchase tax + -->
@@ -100,7 +100,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/fragment_stock_purchase_price_value_tv"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/normal_spacing"
         android:text="@string/purchase_tax"/>
 
     <TextView
@@ -109,7 +109,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/fragment_stock_purchase_price_value_tv"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/normal_spacing"
         tools:text="1.22"/>
 
     <!-- 6) Current currency + -->
@@ -119,7 +119,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/fragment_stock_purchase_tax_value_tv"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/normal_spacing"
         android:text="@string/current_currency"/>
 
     <TextView
@@ -128,7 +128,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/fragment_stock_purchase_tax_value_tv"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/normal_spacing"
         tools:text="154"/>
 
     <!-- 7) Current price + -->
@@ -138,7 +138,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/fragment_stock_current_currency_value_tv"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/normal_spacing"
         android:text="@string/current_price"/>
 
     <TextView
@@ -147,7 +147,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/fragment_stock_current_currency_value_tv"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/normal_spacing"
         tools:text="1000"/>
 
     <!-- 8) Total profit -->
@@ -157,7 +157,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/fragment_stock_current_price_value_tv"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/normal_spacing"
         android:text="@string/total_profit"/>
 
     <TextView
@@ -166,7 +166,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/fragment_stock_current_price_value_tv"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/normal_spacing"
         tools:text="101"/>
 
     <!-- 9) Profitability + -->
@@ -176,7 +176,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/fragment_stock_total_profit_value_tv"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/normal_spacing"
         android:text="@string/profitability"/>
 
     <TextView
@@ -185,7 +185,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/fragment_stock_total_profit_value_tv"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/normal_spacing"
         tools:text="16%"/>
 
     <!-- 10) Dividends -->
@@ -195,7 +195,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/fragment_stock_profitability_value_tv"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/normal_spacing"
         android:text="@string/dividends"/>
 
     <TextView
@@ -204,7 +204,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/fragment_stock_profitability_value_tv"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/normal_spacing"
         tools:text="6"/>
 
 
@@ -214,7 +214,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/fragment_stock_dividends_tv"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/normal_spacing"
         android:text="@string/update"/>
 
     <!-- 12) Delete stock -->
@@ -223,7 +223,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/fragment_stock_update_btn"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/normal_spacing"
         android:text="@string/delete"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

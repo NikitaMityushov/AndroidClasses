@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         android:textAlignment="center"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/normal_spacing"
         android:textSize="22sp"
         tools:text="Please enter the blank lines: "/>
     <!-- 1) Ticker -->
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/update_stock_header_tv"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/normal_spacing"
         android:inputType="text"
         android:importantForAutofill="no"
         android:hint="@string/write_ticker"
@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@id/update_stock_ticker_value_et"
         app:layout_constraintStart_toEndOf="@id/update_stock_ticker_value_et"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/normal_spacing"
         android:text="@string/ticker"/>
     <!-- 2) Quantity -->
     <EditText
@@ -52,7 +52,7 @@
         app:layout_constraintTop_toBottomOf="@id/update_stock_ticker_tv"
         app:layout_constraintStart_toStartOf="parent"
         android:hint="@string/write_quantity"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/normal_spacing"
         android:inputType="number"
         android:importantForAutofill="no"/>
 
@@ -62,7 +62,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@id/update_stock_quantity_et"
         app:layout_constraintStart_toEndOf="@id/update_stock_quantity_et"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/normal_spacing"
         android:text="@string/quantity"/>
 
     <!-- 3) Price -->
@@ -73,7 +73,7 @@
         app:layout_constraintTop_toBottomOf="@id/update_stock_quantity_tv"
         app:layout_constraintStart_toStartOf="parent"
         android:hint="@string/write_price"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/normal_spacing"
         android:inputType="numberDecimal"
         android:importantForAutofill="no"/>
 
@@ -83,7 +83,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@id/update_stock_price_et"
         app:layout_constraintStart_toEndOf="@id/update_stock_price_et"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/normal_spacing"
         android:text="@string/price"/>
     <!-- 4) Tax -->
     <EditText
@@ -93,7 +93,7 @@
         app:layout_constraintTop_toBottomOf="@id/update_stock_price_tv"
         app:layout_constraintStart_toStartOf="parent"
         android:hint="@string/write_tax"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/normal_spacing"
         android:inputType="numberDecimal"
         android:importantForAutofill="no"/>
 
@@ -103,7 +103,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@id/update_stock_tax_et"
         app:layout_constraintStart_toEndOf="@id/update_stock_tax_et"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/normal_spacing"
         android:text="@string/tax"/>
 
     <!-- Button <Buy> -->
@@ -114,7 +114,7 @@
         android:text="@string/save_changes"
         app:layout_constraintTop_toBottomOf="@id/update_stock_tax_tv"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="16dp"/>
+        android:layout_margin="@dimen/normal_spacing"/>
 
 
 

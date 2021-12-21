@@ -12,7 +12,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp">
+            android:padding="@dimens/normal_spacing">
 
             <ImageView
                 android:id="@+id/main_photo_image"
@@ -28,7 +28,7 @@
                 android:id="@+id/property_type_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimens/normal_spacing"
                 android:textColor="#de000000"
                 android:textSize="39sp"
                 app:layout_constraintStart_toStartOf="parent"

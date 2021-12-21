@@ -58,10 +58,10 @@ class StockListFragment : Fragment() {
         })
 
  */
-        binding.refreshBtn.setOnClickListener {
-            Timber.d("refresh is clicked")
-            stLstViewModel.refreshScreen()
-        }
+//        binding.refreshBtn.setOnClickListener {
+//            Timber.d("refresh is clicked")
+//            stLstViewModel.refreshScreen()
+//        }
 
     }
 

@@ -68,11 +68,17 @@ class StockRepository private constructor(context: Context) {
         }
     }
 
-    fun deleteStockPurchase(id: UUID) {
+    fun deleteStockPurchaseFromId(id: UUID) {
         runBlocking(context = Dispatchers.IO) {
             stockDao.deleteStockFromId(id)
             cacheStockDao.invalidateCache()
             refresh()
+        }
+    }
+
+    fun deleteStock(stockPurchase: StockPurchase) {
+        runBlocking(Dispatchers.IO) {
+            stockDao.deleteStock(stockPurchase)
         }
     }
 

@@ -1,79 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".screens.stockFragmentList.StockListFragment">
 
     <Button
         android:id="@+id/fragment_stock_list_buy_btn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/normal_spacing"
+        android:text="@string/buy"
         android:visibility="gone"
-        android:text="@string/buy"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/fragment_stock_list_recyclerview"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/fragment_stock_list_buy_btn"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/fragment_stock_list_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/fragment_stock_list_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/normal_spacing"
+            />
+
+    </ScrollView>
 
     <TextView
         android:id="@+id/fragment_stock_list_summary_profit_tv"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/fragment_stock_list_recyclerview"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/normal_spacing"
+        android:text="@string/total_profit"
         android:textSize="18sp"
-        android:text="@string/total_profit"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_stock_list_scrollview" />
 
     <TextView
         android:id="@+id/fragment_stock_list_summary_profit_value_TV"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/fragment_stock_list_recyclerview"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/normal_spacing"
         android:textSize="18sp"
-        tools:text="some_value"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_stock_list_scrollview"
+        tools:text="some_value" />
 
     <TextView
         android:id="@+id/fragment_stock_list_daily_profit_TV"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/fragment_stock_list_summary_profit_tv"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/normal_spacing"
+        android:text="@string/daily_profit"
         android:textSize="18sp"
-        android:text="@string/daily_profit"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_stock_list_summary_profit_tv"/>
 
     <TextView
         android:id="@+id/fragment_stock_list_daily_profit_value_TV"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/fragment_stock_list_summary_profit_value_TV"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/normal_spacing"
         android:textSize="18sp"
-        tools:text="some_value"/>
-
-
-    <Button
-        android:id="@+id/refresh_btn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/fragment_stock_list_daily_profit_TV"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp"
-        android:text="@string/refresh" />
+        app:layout_constraintTop_toBottomOf="@id/fragment_stock_list_summary_profit_value_TV"
+        tools:text="some_value" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
