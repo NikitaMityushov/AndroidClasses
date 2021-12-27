@@ -6,13 +6,13 @@ plugins {
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
     buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "com.mityushov.investor"
         minSdkVersion 19
-        targetSdkVersion 30
+        targetSdkVersion 31
         versionCode 1
         versionName "1.0"
 
@@ -59,10 +59,10 @@ dependencies {
     implementation 'com.jakewharton.timber:timber:5.0.1'
 
     // Room components
-    implementation "androidx.room:room-ktx:2.3.0"
+    implementation "androidx.room:room-ktx:2.4.0"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    kapt "androidx.room:room-compiler:2.3.0"
-    androidTestImplementation "androidx.room:room-testing:2.3.0"
+    kapt "androidx.room:room-compiler:2.4.0"
+    androidTestImplementation "androidx.room:room-testing:2.4.0"
 
     // Lifecycle components
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"

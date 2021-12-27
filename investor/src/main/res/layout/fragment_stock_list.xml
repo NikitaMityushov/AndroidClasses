@@ -21,17 +21,16 @@
         android:id="@+id/fragment_stock_list_scrollview"
         android:layout_width="match_parent"
         android:layout_height="400dp"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:orientation="vertical">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/fragment_stock_list_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/normal_spacing"
-            />
+            android:layout_margin="@dimen/normal_spacing" />
 
     </ScrollView>
 
@@ -63,7 +62,7 @@
         android:text="@string/daily_profit"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_stock_list_summary_profit_tv"/>
+        app:layout_constraintTop_toBottomOf="@id/fragment_stock_list_summary_profit_tv" />
 
     <TextView
         android:id="@+id/fragment_stock_list_daily_profit_value_TV"

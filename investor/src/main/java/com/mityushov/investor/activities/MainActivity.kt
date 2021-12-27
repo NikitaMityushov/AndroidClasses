@@ -1,11 +1,14 @@
 package com.mityushov.investor.activities
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
+import android.animation.PropertyValuesHolder
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import androidx.appcompat.app.AppCompatDelegate
+import android.view.animation.AnimationSet
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
@@ -18,8 +21,8 @@ import com.mityushov.investor.screens.aboutFragment.AboutFragment
 import com.mityushov.investor.screens.buyStockWindow.BuyStockWindowFragment
 import com.mityushov.investor.screens.stockFragment.StockFragment
 import com.mityushov.investor.screens.stockFragmentList.StockListFragment
-import com.mityushov.investor.screens.stockFragmentList.StockListViewModel
 import com.mityushov.investor.screens.updateStockWindow.UpdateStockWindowFragment
+import com.mityushov.investor.utils.disableViewDuringAnimation
 import timber.log.Timber
 import java.util.*
 
@@ -32,7 +35,12 @@ class MainActivity : AppCompatActivity(), Navigator {
         get() = supportFragmentManager.findFragmentById(R.id.fragment_container)!!
 
     private val fragmentListener = object : FragmentManager.FragmentLifecycleCallbacks() {
-        override fun onFragmentViewCreated(fm: FragmentManager, f: Fragment, v: View, savedInstanceState: Bundle?) {
+        override fun onFragmentViewCreated(
+            fm: FragmentManager,
+            f: Fragment,
+            v: View,
+            savedInstanceState: Bundle?
+        ) {
             super.onFragmentViewCreated(fm, f, v, savedInstanceState)
             updateUI()
         }
@@ -65,6 +73,8 @@ class MainActivity : AppCompatActivity(), Navigator {
         binding.refreshBtn.setOnClickListener {
             Timber.d("refresh is clicked")
             viewModel.refreshScreen()
+            // animations, rolling
+            scaleAndRotateView(it)
         }
     }
 
@@ -144,5 +154,41 @@ class MainActivity : AppCompatActivity(), Navigator {
             supportActionBar?.setDisplayHomeAsUpEnabled(false)
             supportActionBar?.setDisplayShowHomeEnabled(false)
         }
+    }
+
+    private fun rotateViewAnimation(view: View, repeatCount: Int = 1, duration: Long = 800) {
+        val animator = ObjectAnimator.ofFloat(view, View.ROTATION, -360f, 0f)
+        animator.disableViewDuringAnimation(view)
+        animator.repeatCount = repeatCount
+        animator.repeatMode = ObjectAnimator.REVERSE
+        animator.duration = duration
+        animator.start()
+    }
+
+    private fun scaleAndRotateView(view: View) {
+        // 1) create scale animator
+        val scaleX = PropertyValuesHolder.ofFloat(View.SCALE_X, .8f)
+        val scaleY = PropertyValuesHolder.ofFloat(View.SCALE_Y, .8f)
+        val scaleAnimator = ObjectAnimator.ofPropertyValuesHolder(view, scaleX, scaleY)
+        scaleAnimator.disableViewDuringAnimation(view)
+        scaleAnimator.duration = 100
+        scaleAnimator.repeatCount = 1
+        scaleAnimator.repeatMode = ObjectAnimator.REVERSE
+
+        // 2) create rotate animator
+        val rotateAnimator = ObjectAnimator.ofFloat(view, View.ROTATION, 0f, 360f)
+        rotateAnimator.duration = 3000
+        rotateAnimator.disableViewDuringAnimation(view)
+        rotateAnimator.repeatCount = 1
+        rotateAnimator.repeatMode = ObjectAnimator.RESTART
+
+        // 3) create AnimationSet
+
+        val set = AnimatorSet()
+        set.playTogether(scaleAnimator, rotateAnimator)
+
+        // 4) start
+        set.start()
+
     }
 }

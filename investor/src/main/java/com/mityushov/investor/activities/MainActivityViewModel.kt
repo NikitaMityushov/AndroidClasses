@@ -13,4 +13,8 @@ class MainActivityViewModel: ViewModel() {
             repository.refresh()
         }
     }
+
+    fun getItemsCount(): Int {
+        return repository.list.value?.size ?: 0
+    }
 }

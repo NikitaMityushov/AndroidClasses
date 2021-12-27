@@ -39,7 +39,7 @@ class InvestorApplication : Application() {
             .setRequiresBatteryNotLow(true)
             .build()
 
-        val request = PeriodicWorkRequestBuilder<RefreshCacheWorker>(15, TimeUnit.MINUTES, 5, TimeUnit.MINUTES)
+        val request = PeriodicWorkRequestBuilder<RefreshCacheWorker>(1, TimeUnit.HOURS, 5, TimeUnit.MINUTES)
             .setConstraints(constraints)
             .build()
 

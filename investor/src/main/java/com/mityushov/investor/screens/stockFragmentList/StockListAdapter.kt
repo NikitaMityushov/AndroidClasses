@@ -10,7 +10,7 @@ import com.mityushov.investor.databinding.StockItemBinding
 import com.mityushov.investor.navigation.Navigator
 import com.mityushov.investor.models.CacheStockPurchase
 import com.mityushov.investor.utils.StockAPIDiffCallback
-import com.mityushov.investor.utils.setArrowImageRedOrGreen
+import com.mityushov.investor.utils.setArrowImageRedOrGreenOrGrey
 import com.mityushov.investor.utils.setTextColorRedOrGreen
 import timber.log.Timber
 
@@ -55,7 +55,7 @@ class StockListAdapter(private val navigator: Navigator):
 
                 with(stockItemIv) {
                     val value = stock.dailyChange
-                    setImageResource(setArrowImageRedOrGreen(value, this))
+                    setImageResource(setArrowImageRedOrGreenOrGrey(value, this))
                 }
             }
         }
