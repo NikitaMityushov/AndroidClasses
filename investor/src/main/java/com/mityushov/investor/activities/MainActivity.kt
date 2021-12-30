@@ -17,6 +17,7 @@ import com.mityushov.investor.R
 import com.mityushov.investor.databinding.ActivityMainBinding
 import com.mityushov.investor.navigation.Navigator
 import com.mityushov.investor.models.StockPurchase
+import com.mityushov.investor.network.NetworkStatus
 import com.mityushov.investor.screens.aboutFragment.AboutFragment
 import com.mityushov.investor.screens.buyStockWindow.BuyStockWindowFragment
 import com.mityushov.investor.screens.stockFragment.StockFragment
@@ -156,14 +157,14 @@ class MainActivity : AppCompatActivity(), Navigator {
         }
     }
 
-    private fun rotateViewAnimation(view: View, repeatCount: Int = 1, duration: Long = 800) {
-        val animator = ObjectAnimator.ofFloat(view, View.ROTATION, -360f, 0f)
-        animator.disableViewDuringAnimation(view)
-        animator.repeatCount = repeatCount
-        animator.repeatMode = ObjectAnimator.REVERSE
-        animator.duration = duration
-        animator.start()
-    }
+//    private fun rotateViewAnimation(view: View, repeatCount: Int = 1, duration: Long = 800) {
+//        val animator = ObjectAnimator.ofFloat(view, View.ROTATION, -360f, 0f)
+//        animator.disableViewDuringAnimation(view)
+//        animator.repeatCount = repeatCount
+//        animator.repeatMode = ObjectAnimator.REVERSE
+//        animator.duration = duration
+//        animator.start()
+//    }
 
     private fun scaleAndRotateView(view: View) {
         // 1) create scale animator
@@ -179,7 +180,7 @@ class MainActivity : AppCompatActivity(), Navigator {
         val rotateAnimator = ObjectAnimator.ofFloat(view, View.ROTATION, 0f, 360f)
         rotateAnimator.duration = 3000
         rotateAnimator.disableViewDuringAnimation(view)
-        rotateAnimator.repeatCount = 1
+        rotateAnimator.repeatCount = 11
         rotateAnimator.repeatMode = ObjectAnimator.RESTART
 
         // 3) create AnimationSet
@@ -188,7 +189,17 @@ class MainActivity : AppCompatActivity(), Navigator {
         set.playTogether(scaleAnimator, rotateAnimator)
 
         // 4) start
-        set.start()
+//        set.start()
+// рабочая система, но состояние анимации остается на момент остановки, не начальным, надо переделать в будещем
+        viewModel.status.observe(this, {value ->
+            when (value) {
+                NetworkStatus.LOADING -> set.start()
+                NetworkStatus.DONE -> set.cancel()
+                else -> {
+                    set.cancel()
+                }
+            }
+        })
 
     }
 }

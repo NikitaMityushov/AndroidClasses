@@ -2,11 +2,13 @@ package com.mityushov.investor.repository
 
 import android.content.Context
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.room.Room
 import com.mityushov.investor.database.StockDatabase
 import com.mityushov.investor.models.CacheStockPurchase
 import com.mityushov.investor.network.CnbcService
 import com.mityushov.investor.models.StockPurchase
+import com.mityushov.investor.network.NetworkStatus
 import com.mityushov.investor.network.asCacheNetworkStockPurchase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -36,9 +38,18 @@ class StockRepository private constructor(context: Context) {
     // 3) Cache list
     var list = cacheStockDao.getAllStocks()
 
-    // 4) Refresh Cache
+    // 4) Network status
+    private val _status = MutableLiveData<NetworkStatus>()
+
+    val status: LiveData<NetworkStatus>
+        get() {
+            return _status
+        }
+
+    // 5) Refresh Cache
     suspend fun refresh() {
         Timber.d("Refresh is called")
+        _status.value = NetworkStatus.LOADING
         withContext(Dispatchers.IO) {
             val stockList = stockDao.getAllStocks()
             val cache =
@@ -46,6 +57,7 @@ class StockRepository private constructor(context: Context) {
                     .toList()
             cacheStockDao.insertAll(cache)
         }
+        _status.value = NetworkStatus.DONE
     }
 
     fun getStockFromId(id: UUID): StockPurchase {

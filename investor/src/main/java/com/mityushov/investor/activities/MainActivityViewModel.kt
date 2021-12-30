@@ -8,6 +8,8 @@ import kotlinx.coroutines.launch
 class MainActivityViewModel: ViewModel() {
     private val repository = StockRepository.get()
 
+    val status = repository.status
+
     fun refreshScreen() {
         viewModelScope.launch {
             repository.refresh()

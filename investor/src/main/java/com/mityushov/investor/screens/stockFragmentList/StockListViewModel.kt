@@ -1,7 +1,9 @@
 package com.mityushov.investor.screens.stockFragmentList
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.mityushov.investor.network.NetworkStatus
 import com.mityushov.investor.repository.StockRepository
 import kotlinx.coroutines.launch
 
