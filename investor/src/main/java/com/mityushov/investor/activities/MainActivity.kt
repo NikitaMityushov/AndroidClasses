@@ -157,15 +157,6 @@ class MainActivity : AppCompatActivity(), Navigator {
         }
     }
 
-//    private fun rotateViewAnimation(view: View, repeatCount: Int = 1, duration: Long = 800) {
-//        val animator = ObjectAnimator.ofFloat(view, View.ROTATION, -360f, 0f)
-//        animator.disableViewDuringAnimation(view)
-//        animator.repeatCount = repeatCount
-//        animator.repeatMode = ObjectAnimator.REVERSE
-//        animator.duration = duration
-//        animator.start()
-//    }
-
     private fun scaleAndRotateView(view: View) {
         // 1) create scale animator
         val scaleX = PropertyValuesHolder.ofFloat(View.SCALE_X, .8f)
