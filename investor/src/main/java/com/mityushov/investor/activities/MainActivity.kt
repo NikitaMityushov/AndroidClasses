@@ -171,7 +171,7 @@ class MainActivity : AppCompatActivity(), Navigator {
         val rotateAnimator = ObjectAnimator.ofFloat(view, View.ROTATION, 0f, 360f)
         rotateAnimator.duration = 3000
         rotateAnimator.disableViewDuringAnimation(view)
-        rotateAnimator.repeatCount = 11
+        rotateAnimator.repeatCount = ObjectAnimator.INFINITE
         rotateAnimator.repeatMode = ObjectAnimator.RESTART
 
         // 3) create AnimationSet
