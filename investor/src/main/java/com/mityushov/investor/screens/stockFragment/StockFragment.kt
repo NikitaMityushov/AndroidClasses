@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import com.mityushov.investor.data.StockRepository
 import com.mityushov.investor.databinding.FragmentStockBinding
 import com.mityushov.investor.navigation.navigator
 import com.mityushov.investor.models.CacheStockPurchase
@@ -27,7 +28,7 @@ class StockFragment private constructor() : Fragment() {
         val stockId: UUID = arguments?.getSerializable(ARG_STOCK_ID) as UUID
         id = stockId
 
-        viewModelFactory = StockFragmentViewModelFactory(id)
+        viewModelFactory = StockFragmentViewModelFactory(id, StockRepository.get())
 
         Timber.i("StockFragments args bundle stock ID: $stockId")
     }

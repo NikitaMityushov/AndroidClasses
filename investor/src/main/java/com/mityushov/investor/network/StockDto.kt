@@ -17,7 +17,7 @@ data class StockDto(
 )
 
 // Extension
-fun StockDto.asCacheNetworkStockPurchase(): CacheStockPurchase {
+fun StockDto.asCacheStockPurchase(): CacheStockPurchase {
     return CacheStockPurchase(
         id = stockPurchase.id,
         ticker = stockPurchase.ticker,

@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mityushov.investor.network.NetworkStatus
-import com.mityushov.investor.repository.StockRepository
+import com.mityushov.investor.data.StockRepository
 import kotlinx.coroutines.launch
 
 class StockListViewModel : ViewModel() {

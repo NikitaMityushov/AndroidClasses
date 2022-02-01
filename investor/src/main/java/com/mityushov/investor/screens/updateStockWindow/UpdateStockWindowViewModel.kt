@@ -1,17 +1,18 @@
 package com.mityushov.investor.screens.updateStockWindow
 
 import androidx.lifecycle.ViewModel
+import com.mityushov.investor.data.IStockRepository
 import com.mityushov.investor.models.StockPurchase
-import com.mityushov.investor.repository.StockRepository
+import kotlinx.coroutines.runBlocking
 import timber.log.Timber
 
-class UpdateStockWindowViewModel(private val stock: StockPurchase): ViewModel() {
-    private val repository = StockRepository.get()
-
+class UpdateStockWindowViewModel(
+    private val stock: StockPurchase,
+    private val repository: IStockRepository
+) : ViewModel() {
     // api
-    fun updateStockPurchase() {
+    fun updateStockPurchase() = runBlocking {
         Timber.d("updateStockPurchase is called from viewModel, stock is $stock")
         repository.updateStockPurchase(stock)
     }
-
 }

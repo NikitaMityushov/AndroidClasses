@@ -1,44 +1,26 @@
 package com.mityushov.investor.network
 
-import com.mityushov.investor.models.StockAPI
+import com.mityushov.investor.models.CacheStockPurchase
+import com.mityushov.investor.models.RemoteServiceStockAPI
 import com.mityushov.investor.models.StockPurchase
 import kotlinx.coroutines.*
 import org.jsoup.Jsoup
 import org.jsoup.select.Elements
 import timber.log.Timber
-import java.util.*
 
 private const val BASE_URL = "https://www.cnbc.com/quotes/"
 
-class CnbcService(private val stockPurchase: StockPurchase) : StockAPI {
+object CnbcService : RemoteServiceStockAPI {
     private var currCurrency = 0.0F
     private var dailChange: Float = 0.0F
     private var dailChangePercent: Float = 0.0F
     private var name = ""
-    val stockDto: StockDto
+    private lateinit var stockDto: StockDto
 
-    init {
-        // start coroutine
-        runBlocking(context = Dispatchers.IO) {
-            getCurCurrency()
-        }
-        stockDto = StockDto(
-            stockPurchase = stockPurchase,
-            purchasePrice = getPurchasePrice(),
-            currentCurrency = currCurrency,
-            dailyChange = dailChange,
-            dailyChangePercent = dailChangePercent,
-            currentPrice = getCurrentPrice(),
-            totalProfit = getTotalProfit(),
-            profitability = getProfitability(),
-            dividends = getDividends(),
-            name = getName()
-        )
-    }
     /*
         private methods
     */
-    private fun getCurCurrency() {
+    private fun getCurCurrency(stockPurchase: StockPurchase) {
         /**
          * Build request to www.cnbc.com with JSOUP
          */
@@ -66,64 +48,51 @@ class CnbcService(private val stockPurchase: StockPurchase) : StockAPI {
     /*
         API methods
      */
-    override fun getId(): UUID {
-        return stockPurchase.id
-    }
 
-    override fun getName(): String {
+    private fun getName(): String {
         return name
     }
 
-    override fun getTicker(): String {
-        return stockPurchase.ticker
-    }
-
-    override fun getAmount(): Int {
-        return stockPurchase.amount
-    }
-
-    override fun getPurchaseCurrency(): Float {
-        return stockPurchase.purchaseCurrency
-    }
-
-    override fun getPurchasePrice(): Float {
+    private fun getPurchasePrice(stockPurchase: StockPurchase): Float {
         return stockPurchase.purchaseCurrency * stockPurchase.amount
     }
 
-    override fun getPurchaseTax(): Float {
-        return stockPurchase.purchaseTax
-    }
-
-    override fun getCurrentCurrency(): Float {
-        return currCurrency
-    }
-
-    override fun getDailyChange(): Float {
-        return dailChange
-    }
-
-    override fun getDailyChangeInPercent(): Float {
-        return dailChangePercent
-    }
-
-    override fun getCurrentPrice(): Float {
+    private fun getCurrentPrice(stockPurchase: StockPurchase): Float {
         return stockPurchase.amount * currCurrency
     }
 
-    override fun getTotalProfit(): Float {
+    private fun getTotalProfit(stockPurchase: StockPurchase): Float {
         return stockPurchase.amount * (currCurrency - stockPurchase.purchaseCurrency) - stockPurchase.purchaseTax
     }
 
-    override fun getProfitability(): Float {
-        return 100 * ((stockPurchase.amount * currCurrency / (getPurchasePrice() + stockPurchase.purchaseTax)) - 1)
+    private fun getProfitability(stockPurchase: StockPurchase): Float {
+        return 100 * ((stockPurchase.amount * currCurrency / (getPurchasePrice(stockPurchase) + stockPurchase.purchaseTax)) - 1)
     }
 
-    override fun getDividends(): Float {
+    private fun getDividends(): Float {
         // TODO("Not yet implemented")
         return 0.0F
     }
-
-    override fun getStockPurchase(): StockPurchase {
-        return stockPurchase
+    /*
+        public methods
+     */
+    override suspend fun getResponse(stockPurchase: StockPurchase): CacheStockPurchase {
+        // start coroutine
+        withContext(context = Dispatchers.IO) {
+            getCurCurrency(stockPurchase)
+        }
+        stockDto = StockDto(
+            stockPurchase = stockPurchase,
+            purchasePrice = getPurchasePrice(stockPurchase),
+            currentCurrency = currCurrency,
+            dailyChange = dailChange,
+            dailyChangePercent = dailChangePercent,
+            currentPrice = getCurrentPrice(stockPurchase),
+            totalProfit = getTotalProfit(stockPurchase),
+            profitability = getProfitability(stockPurchase),
+            dividends = getDividends(),
+            name = getName()
+        )
+        return stockDto.asCacheStockPurchase()
     }
 }

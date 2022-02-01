@@ -9,7 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.mityushov.investor.R
-import com.mityushov.investor.repository.StockRepository
+import com.mityushov.investor.data.StockRepository
 import com.mityushov.investor.utils.sendNotification
 import timber.log.Timber
 import java.lang.Exception

@@ -1,8 +1,13 @@
 package com.mityushov.investor
 
 import android.app.Application
+import androidx.room.Room
 import androidx.work.*
-import com.mityushov.investor.repository.StockRepository
+import com.mityushov.investor.data.StockRepository
+import com.mityushov.investor.data.local.LocalCacheStockDataSource
+import com.mityushov.investor.data.local.LocalStockDataSource
+import com.mityushov.investor.data.remote.RemoteStockDataSource
+import com.mityushov.investor.database.StockDatabase
 import com.mityushov.investor.work.RefreshCacheWorker
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -11,6 +16,8 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
+private const val DATABASE_NAME = "stocks"
+
 class InvestorApplication : Application() {
     // 1) for coroutine context
     private val applicationJob = Job()
@@ -18,8 +25,21 @@ class InvestorApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-
-        StockRepository.init(this)
+        // init database
+        val database: StockDatabase by lazy {
+            Room.databaseBuilder(
+                this.applicationContext,
+                StockDatabase::class.java,
+                DATABASE_NAME
+            )
+                .build()
+        }
+        // init Repository
+        StockRepository.init(
+            localStockDataSource = LocalStockDataSource(database.stockDao()),
+            localCacheStockDataSource = LocalCacheStockDataSource(database.cacheStockDao()),
+            remoteStockDataSource = RemoteStockDataSource()
+        )
         // logging
         Timber.plant(Timber.DebugTree())
         // Work manager start

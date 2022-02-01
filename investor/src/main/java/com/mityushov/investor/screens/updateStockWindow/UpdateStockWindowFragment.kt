@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import com.mityushov.investor.data.StockRepository
 import com.mityushov.investor.databinding.FragmentUpdateStockWindowBinding
 import com.mityushov.investor.models.StockPurchase
 import timber.log.Timber
@@ -24,7 +25,7 @@ class UpdateStockWindowFragment private constructor() : Fragment() {
         val stock: StockPurchase = arguments?.getSerializable(ARG_STOCK_PURCHASE) as StockPurchase
         stockPurchase = stock
 
-        viewModelFactory = UpdateStockWindowViewModelFactory(stockPurchase)
+        viewModelFactory = UpdateStockWindowViewModelFactory(stockPurchase, StockRepository.get())
 
         Timber.i("UpdateStockWindowFragment args bundle stock ticker: ${stockPurchase.ticker}")
     }
